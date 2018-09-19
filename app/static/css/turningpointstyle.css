@@ -1,0 +1,194 @@
+
+/*字体样式*/
+@font-face {
+	font-family:'YaHei Consolas Hybrid';
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+* {
+    font-family:"YaHei Consolas Hybrid";
+    font-size:14px;
+  }/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background: transparent;
+}
+body {
+    background-color:#1b1b1b;
+    margin-top: 20px;
+	 padding: 0;
+	 position: relative;
+}
+h1{ font-size:20px;}
+h2{ font-size:18px;text-align: center;margin: 30px auto; }
+h3{ font-size:16px;}
+h4{ font-size:14px;}
+h5{ font-size:12px;}
+h6{ font-size:10px;}
+h1,h2,h3,h4,h5,h6{ color: #edeef2;}
+b, strong{ font-weight:bold;}
+a{ text-decoration: none; }
+a:hover{ text-decoration: underline; }
+/*顶部*/
+.indexheader{
+               width:1002px;
+               margin:0 auto;
+               overflow:hidden;
+              }
+.index_logo img{
+                    float:left;
+                    margin-top:30px;
+                    margin-bottom:30px;
+                 }
+.index_login{
+                float:right;
+                /*margin-top:16px;*/
+                margin-right:30px;
+             }
+.index_login a{
+                    /*line-height:104px;*/
+                    margin-left:20px;
+                    color:#c1c1c1;
+                    display: inline-block;
+                    margin-top:76px;
+                }
+/*导航*/
+.index_navbox{
+                background-color:#000000;
+                overflow:hidden;
+               }
+.index_nav{
+               width:1002px;
+               margin:0 auto;
+               overflow:hidden;
+           }
+.index_nav li{
+                float:left;
+                width:120px;
+                text-align:center;
+                margin-right:20px;
+               }
+.index_nav li a{
+                    line-height:56px;
+                    color:#ececec;
+                    /*font-family:"黑体";*/
+                    font-size:20px;
+                 }
+.index_nav .active{
+                      background-color:#282828;
+                     }
+.index_nav .active a{
+                        color:#13c016;
+                       }
+/*内容*/
+.turningpoint-content{ 
+							width:1002px;
+							margin: 0 auto;
+					}
+table{
+    border:1px solid #808080;
+    margin:0 auto;
+    width:100%;
+}
+table tbody tr td{
+              width: 150px;
+              height: 30px;
+              padding-top: 6px;
+              padding-bottom: 6px;
+              color:honeydew;
+              font-size: 14px;
+              text-align: center;
+}
+table tbody th{
+              padding-top: 6px;
+              padding-bottom: 6px;
+              color:honeydew;
+              font-weight:bold;
+              }
+table thead tr {
+				  width: 150px;
+              height: 30px;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              color: #dfe2e2;
+	           font: 20px Arial;
+              color: honeydew;
+              font-weight:bold;
+}
+table thead tr th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+              font-size: 16px;
+}
+td a{
+    color: honeydew;
+    font-weight:bold;
+}
+.show{
+    margin: 30px 200px 0 200px;
+    width:380px;
+    height: 280px;
+    border: 1px solid #c9e2b3;
+    color: rgba(223, 226, 226, 0.64);
+    font:normal 16px 'MicroSoft YaHei';
+    radio:10px;
+}
+.show h2{ color: #f1ffda;line-height: 70px;}
+.show p{
+         line-height: 50px;
+         margin-left: 70px;
+         display: inherit;
+}
+.editbox{
+     background: #ffffff;
+     border: 1px solid #b7b7b7;
+     color: #000000;
+     cursor: text;
+     font-size: 12px;
+     height: 18px;
+     padding: 1px;
+}
+select{
+     width: 150px;
+     line-height: 50px;
+     border-right: #000000 1px solid;
+     border-top: #ffffff 1px solid;
+     font-size: 14px;
+     border-left: #ffffff 1px solid;
+     color: #000000;
+     border-bottom: #000000 1px solid;
+     background-color: #f4f4f4;
+}
+
+ .t12{
+        text-decoration : none;
+        font-size: 14px;
+        color: #e8e8e8;
+        margin: 50px 30px 70px 248px;
+        padding: 5px 20px 5px 20px;
+        border: 1px #15ff2c solid;
+        background-color:#1b1b1b;
+        text-align: center
+    }
+
+.t12:hover{
+        text-decoration : none;
+        font-size: 14px;
+        color: #52ff07;
+        margin: 50px 30px 70px 248px;
+        padding: 5px 20px 5px 20px;
+        border: 1px #52ff07 solid;
+        background-color: #1b1b1b;
+        text-align: center
+    }

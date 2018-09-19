@@ -1,0 +1,9 @@
+body{
+    background:url(../images/w_enbei-2-bg.jpg) top center;
+}
+.taskname,.taskinfo,.inputname,.inputinfo{
+    color:#333;
+}
+.tasksubmit {
+    background-color: #0068B7;
+}

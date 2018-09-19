@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <style>
+    .pagination{display:inline-block;padding-left:0;margin:20px 0;border-radius:4px}
+    .pagination>li{display:inline}.pagination>li>a,
+    .pagination>li>span{position:relative;float:left;padding:6px 12px;line-height:1.42857143;text-decoration:none;color: #333;background-color: #fff;border:1px solid #3879D9;margin-left:-1px}
+    .pagination>li:first-child>a,
+    .pagination>li:first-child>span{margin-left:0;border-bottom-left-radius:4px;border-top-left-radius:4px}
+    .pagination>li:last-child>a,
+    .pagination>li:last-child>span{border-bottom-right-radius:4px;border-top-right-radius:4px}
+    .pagination>li>a:hover,.pagination>li>span:hover,
+    .pagination>li>a:focus,
+    .pagination>li>span:focus{color: #917df3;background-color: #e4ee80;border-color:#3879D9}
+    .pagination>.active>a,
+    .pagination>.active>a:hover,
+    .pagination>.active>span,
+    .pagination>.active>span:hover,
+    .pagination>.active>a:focus,
+    .pagination>.active>span:focus{z-index:2;color:#fff;background-color: #1dca3e;border-color: #3879D9;cursor:default}
+    .pagination>.disabled>span,
+    .pagination>.disabled>span:hover,
+    .pagination>.disabled>span:focus,
+    .pagination>.disabled>a,
+    .pagination>.disabled>a:hover,
+    /*.pagination>.disabled>a:focus{color:#999;background-color: #000000;border-color:#ddd;cursor:not-allowed}*/
+    .pagination>.disabled>a:focus{color:#999;background-color: #fff;border-color:#3879D9;cursor:not-allowed}
+    .pagination-lg>li>a,
+    .pagination-lg>li>span{padding:10px 16px;font-size:18px}
+    .pagination-lg>li:first-child>a,
+    .pagination-lg>li:first-child>span{border-bottom-left-radius:6px;border-top-left-radius:6px}
+    .pagination-lg>li:last-child>a,
+    .pagination-lg>li:last-child>span{border-bottom-right-radius:6px;border-top-right-radius:6px}
+    .pagination-sm>li>a,.pagination-sm>li>span{padding:5px 10px;font-size:12px}
+    .pagination-sm>li:first-child>a,
+    .pagination-sm>li:first-child>span{border-bottom-left-radius:3px;border-top-left-radius:3px}
+    .pagination-sm>li:last-child>a,
+    .pagination-sm>li:last-child>span{border-bottom-right-radius:3px;border-top-right-radius:3px}
+    .source-code{
+      color: red;
+    }
+    /*p{color:#fdfdfd;}*/
+    p{color:#333;}
+    .pagination{color:rgba(0,0,0,0)!important;}
+    /*body{white-space:nowrap;overflow:scroll;background-color: #000000;}*/
+    body{white-space:nowrap;overflow:scroll;background-color: #9DC9ED;}
+  </style>
+<link rel="stylesheet" href="/static/css/font_style.css">
+<link rel="stylesheet" href="/static/css/w_scroll.css">
+</head>
+<body>
+{% import "w__macros.html" as macros %}
+{% for asm in asm_list.items %}
+  {% if asm.addr == 0 %}
+    <p class='source-code'>SourceCode : {{ asm.info }}</p>
+  {% else %}
+    <p>{{ hex(asm.addr) }} : {{ asm.info }}</p>
+  {% endif %}
+{% endfor %}
+{% if asm_list %}
+<ul class="pagination">
+   {{ macros.pagination_widget(asm_list, 'features.w_func_src_info') }}
+</ul>
+{% endif %}
+<script src="/static/jquery.js"></script>
+<script type="text/javascript">
+//点击全屏显示
+ $(function() {
+     var flag=true;
+     if(window.location.href!=top.location.href){
+         flag=true;
+     }
+     else {
+         flag=false;
+     }
+     if(flag==true){
+         $("body").dblclick( function() {
+           window.open(" {{ url_for('features.w_func_src_info',page=1) }} ")
+           });
+       }else{
+         flag=false;
+     }
+    })
+</script>
+</body>
+</html>
+
+
+
+

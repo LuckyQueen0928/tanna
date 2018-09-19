@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<title>Process-Conctrl</title>
+<link rel="stylesheet" type="text/css" href="/static/css/overallstyle.css">
+<link rel="stylesheet" type="text/css" href="/static/css/nbitstyle.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/processContralStyle.css"/>
+</head>
+<body>
+<!--首页logo部分-->
+<div class="indexheader">
+    <div class="index_logo">
+    <img src="/static/images/logo.png">
+    </div>
+</div>
+<!--导航-->
+<nav class="index_navbox">
+<ul class="index_nav">
+    <li><a href="/">首页</a></li>
+    <li><a href="/">任务管理</a></li>
+    <li><a href="/newtask/">新建任务</a></li>
+    <li><a href="">关于</a></li>
+</ul>
+</nav>
+<!--中间部分-->
+<div class="content">
+    <h2 class="content-1">进程控制</h2>
+	    <div class="content-1">
+	        <h3>自动化遍历进程</h3>
+            <div>
+                <P>若覆盖率不变，每间隔 <span style="color:limegreen">{{ timeout }}</span> 秒自动遍历下一个状态，当前进程的PID为 <span style="color:limegreen">{{ pid }}</span>  <a href="{{ url_for('features.stop_index_process') }}"class="t12" >停止</a></P>
+                <form action="{{ url_for('features.changeIndexTraversalTimeout') }}" method="POST">
+                    <label><span>自定义间隔时间(单位：秒)：</span></label><input name='timeout'style="width: 110px;"/>
+                    <input type="submit" value="提交并重启进程" class="t12"/>
+                </form>
+                <form action="{{ url_for('features.setTotalTime') }}" method="POST">
+                    <label><span>设定状态遍历总时间(单位：秒)：</span></label><input name='timeout'style="width: 110px;"/>
+                    <input type="submit" value="提交并重启进程" class="t12"/>
+                </form>
+                <p>如果要控制遍历进程：
+                    <a href="{{ url_for('features.start_index_process') }}"class="t12" >当前状态重置</a>
+                    <a href="{{ url_for('features.next_index_process') }}"class="t12" >切换下一状态</a></p>
+                <p>* 注：点击[状态]按钮会停止当前所有样本，并按照规则生成新的样本。</p>
+            </div>
+        </div>
+    <div class="content-2">
+        <h3>覆盖率记录进程</h3>
+        <div>
+            <p>覆盖率记录进程PID: <span style="color:limegreen">{{ logpid }}</span></p>
+            <p>如果控制记录进程：<a href="{{ url_for('features.start_log_process') }}"  class="t12">开始</a> <a href="{{ url_for('features.stop_log_process') }}"  class="t12">停止</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

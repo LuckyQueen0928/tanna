@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/bootflatly.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/static/css/nbitstyle.css">
+<link rel="stylesheet" type="text/css" href="/static/css/uploadfile.css">
+<script src="/static/js/nbit.js"></script>
+<script src="/static/jquery.js"></script>
+</head>
+<body>
+<!--首页logo部分-->
+<div class="bigtop">
+<div class="indexheader">
+	<div class="index_logo">
+    <img src="/static/images/logo.png">
+    </div>
+    <div class="index_login">
+        <a href="{{ url_for('auth.resetpassword') }}" target="_blank">重置密码</a>
+        <a href="{{ url_for('auth.logout') }}" target="_blank">退出登录</a>
+    </div>
+</div>
+</div>
+<!--导航-->
+<div class="index_navbox">
+<ul class="index_nav">
+    <li><a href={{ url_for('main.login_guide') }}>首页</a></li>
+    <li><a href={{ url_for('main.index') }}>任务管理</a></li>
+    <li class="active"><a href="/newtask/">新建任务</a></li>
+    <li><a href="">关于</a></li>
+</ul>
+</div>
+<!--中间内容-->
+<div class="netupload">
+    <form id="data" method="post" enctype="multipart/form-data">
+    <h2>上传所需文件：</h2>
+        <!--   <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h4>待测程序</h4>
+        <input name="program" type="file" class="filechance"/>
+      </div> -->
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3>目标程序源码：</h3>
+        <input name="source-zip" type="file" id="sourcefile" class="filechance1" onclick="tishi()" onchange="sourcefile_onselect()" />
+        （Zip压缩格式）
+      </div>
+       <!-- <div class="daice">
+       <img src="/static/images/smalldian.jpg">
+        <h4>MAP文件：</h4>
+        <input name="map-obj" type="file" class="filechance1" />
+        </div> -->
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3> PeachPit文件：<span style="color:red;">*</span></h3>
+        <input name="peachpit" id="peachpitfile" type="file" class="filechance" onclick="tishi()" onchange="peachpitfile_onselect()" />
+        （Zip压缩格式）
+      </div>
+
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3>HOOK函数：</h3>
+        <textarea name="hook-up" class="hook-up" maxlength="255" ></textarea>
+      </div>
+        <div>
+            <button type="button" onclick ="javascript:history.go(-1);">上一步</button>
+            <button class="tijiao" type="submit" >下一步</button>
+        </div>
+    </form>
+
+
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#data").submit(function(){
+		var ifsub = true;
+		$(".filechance").each(function(){
+			var val = $.trim($(this).val());
+			if(val=="" || val==null){
+				ifsub = false;
+			}
+		})
+		if(!ifsub){
+			alert("待测程序和pit文件必须上传，不能为空");
+			return false;
+		}
+	})
+})
+//提示信息
+function tishi() {
+    return
+    alert("请选择zip文件:");
+}
+//获取文件名后缀
+function sourcefile_onselect()
+{
+     var str=$("#sourcefile").val();
+    var arr=str.split('\\');
+    var my=arr[arr.length-1];//这就是要取得文件名称
+    var last=my.split('.');
+    var laststr=last[last.length-1];
+}
+function peachpitfile_onselect()
+{
+    var str=$("#peachpitfile").val();
+    var arr=str.split('\\');
+    var my=arr[arr.length-1];//这就是要取得文件名称
+    var last=my.split('.');
+    var laststr=last[last.length-1];
+    // alert("你选择的文件类型为："+laststr);
+}
+</script>
+</body>
+</html>

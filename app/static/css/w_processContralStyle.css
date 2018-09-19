@@ -1,0 +1,24 @@
+h3{
+    color:#333;
+    text-shadow: 0 0 5px #fff;
+}
+div.content-2{
+    background-color: #4D96CD;
+    box-shadow: 0 0 5px #666;
+    width:982px;
+    margin:20px auto;
+}
+input{
+    background-color: #fff;
+    color:#333;
+}
+.t12{
+    background-color: #6CA80C;
+    border:1px solid #066A07;
+}
+
+.t12:hover{
+    background-color: #558605;
+    border:1px solid #fff;
+    color:#fff;
+}

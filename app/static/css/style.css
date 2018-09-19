@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{padding:0;  margin:0; background-image:url(../images/index_01.jpg); background-repeat:repeat-x;}
+/*历史任务列表*/
+.content{width:1004px; height:726px; margin:0 auto; background:url(../images/lsrw.jpg); padding-top:200px;}
+.con_area{width:920px; margin:0 auto;}
+.top{height:30px; margin-bottom:30px;}
+.top_title{float:left; margin-left:20px;}
+.title_pic{float:left; height:30px;  margin-right:5px;}
+.title_con{float:left;line-height:30px; width:161px; height:29px; background-image:url(../images/lsrwlb.png);}
+.search{float:right; margin-right:30px; height:30px}
+.search_con{position:relative; height:auto; padding:5px 0;}
+#textInput{display:block; height:20px; width:200px;}
+.submit_btn{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 9px;
+	top: 7px;
+}
+#submit_button{display:block; width:22px; height:22px; background-image:url(../images/lsrw-1.jpg); border:none;}
+.main_con table{width:900px; height:auto; color:#fff; border-collapse:collapse; text-align:center;}
+.main_con table td{height:40px;}
+.page_ch{float:right; margin-right:40px; height:25px; color:#fff; font-size:16px; line-height:25px;margin-top:10px;}
+.mission_p{width:276px; height:26px; margin:35px auto 0;}
+.xjrw{width:128px; height:26px;  float:left; margin-right:20px;}
+.scrw{width:128px; height:26px;  float:left;}
+#xjrw{width:128px; height:26px; background-image:url(../images/lsrw_22.jpg); border:none; cursor:pointer;}
+#scrw{width:128px; height:26px; background-image:url(../images/lsrw_24.jpg); border:none; cursor:pointer;}
+
+/*路径图*/
+.qjlj{width:460px; float:left; height:auto;}
+.qjlj_top{height:29px; }
+.top_pic{width:27px; height:27px; float:left; background-image:url(../images/index_07.jpg); margin-left:30px;}
+.top_con{width:138px; height:29px; float:left; background-image:url(../images/ljt_06.png);margin-left:5px;}
+.jblj{width:460px; float:left; height:auto;}
+.jblj_left{float:left; width:114px; margin-right:46px;}
+.ssbg{width:114px; height:21px; margin-bottom:20px; }
+.ljzh{width:114px; height:21px; margin-bottom:20px; }
+#ssbg{width:114px; height:21px; background-image:url(../images/index_04.jpg); border:none; cursor:pointer;}
+#ljzh{width:114px; height:21px; background-image:url(../images/index_11.jpg); border:none; cursor:pointer;}
+
+.jblj_right{width:300px; height:auto; float:left;}
+.jbljt_top{height:30px;}
+.jbljt_title{width:135px; height:30px; float:left; background-image:url(../images/jbljt_03.png);}
+.jbljt_con{height:300px;}
+.hsxx{height:28px;}
+.hsxx_title{float:left; width:110px; height:28px; background-image:url(../images/ljt_10.png);}
+.hsxx_con{float:left; width:190px;height:auto; line-height:28px; color:#fff;}
+.zlj{height:32px; margin-top:20px;}
+.zlj_title{width:86px; height:32px; float:left; background-image:url(../images/ljt_13.png);}
+.zlj_con{float:left; width:214px;height:auto; line-height:32px; color:#fff;}
+
+
+.rwpz{height:120px; width:200px; background-color:green; color:#fff;}
+.rwpz_top{height:29px;}
+.rwpz_toppic{float:left; width:28px; height:29px; background-image:url(../images/index_05.jpg); margin-right:5px;}
+
+.ssss{width:200px; height:100px; background-color:#fff;}
+/*任务配置页面*/
+.task_config{margin-left:34px;}
+.form_menu{color:#dddddd;font-size:20px;margin-left:90px;margin-top:76px; text-shadow: 0px 1px #8f8f8f}
+.form_menu td{height:48px;}
+.choose_file{margin-bottom:-8px;}
+.submit_file{float:right;margin-right:74px;margin-top:16px;}
+#tjpz{border:none; background-image:url(../images/index_13.jpg); width:128px; height:26px;}
+.form_menu a{display:inline-block;height:28px; background-image:url(../images/index_09.jpg); overflow:hidden;}
+input#scwj{ width:105px; height:28px; font-size:100px; opacity:0; filter:alpha(opacity=0);}
+/*任务删除页面*/
+.delete_task{margin-top:132px; text-align:center;}
+.delete_task img{ display:block;margin-left:auto;margin-right:auto;}
+.delete_task a{ text-decoration:none;}
+.waste_ig{margin-top:26px;margin-bottom:74px;}
+/*任务创建页面*/
+.creation_task img{display:block;margin-top:6px;}
+.task_img1{margin-top:24px;margin-bottom:8px;}
+.creation_tab{line-height:38px; font-size:20px; color:#fff; font-weight:bold;
+	/*line-height:17px;*/
+}
+
+

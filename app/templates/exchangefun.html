@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>black function list</title>
+<link rel="stylesheet" type="text/css" href="/static/css/exchagefunStyle.css">
+<script src="/static/jquery.js"></script>
+<script>
+  window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')
+</script>
+<link rel="stylesheet" href="/static/css/alertify.core.css" />
+<link rel="stylesheet" href="/static/css/alertify.default.css" />
+<script src="/static/js/alertify.min.js"></script>
+</head>
+
+<body>
+<!--首页logo部分-->
+<div class="bigtop">
+<div class="indexheader">
+	<div class="index_logo">
+    <img src="/static/images/logo.png">
+    </div>
+    <div class="index_login">
+        <a href="{{ url_for('auth.resetpassword') }}" target="_blank">重置密码</a>
+        <a href="{{ url_for('auth.logout') }}" target="_blank">退出登录</a>
+    </div>
+</div>
+</div>
+<!--导航-->
+<div class="index_navbox">
+<ul class="index_nav">
+    <li><a href={{ url_for('main.login_guide') }}>首页</a></li>
+    <li class="active"><a href={{ url_for('main.index') }}>任务管理</a></li>
+    <li class="active"><a href="/newtask/">新建任务</a></li>
+    <li><a href="">关于</a></li>
+</ul>
+</div>
+<div class="changebox">
+	<div class="leftbox">
+		<form method="post" name="myform"> 
+<table border="0" width="300"> 
+<tr> 
+<td> 
+<div class="listbt">函数列表</div>
+<select id="funcitonlist" class="funcitonlist" multiple name="list1" size="12" ondblclick="moveOption(document.myform.list1, document.myform.list2)"> 
+    {% for gnode in gnodelist %}
+      <option title="{{ hex(gnode.id) }}:{{ gnode.name }}" id="{{ hex(gnode.id) }}">{{ hex(gnode.id) }}:{{ gnode.name }}</option>
+    {% endfor %}
+      <option id="addoptions">加载更多...                          </option>
+</select> 
+</td> 
+<td align="center"> 
+    <input class="rightadd" type="button" onclick="moveOption(document.myform.list1, document.myform.list2)"><br>
+    <input class="leftadd" type="button" onclick="moveOption(document.myform.list2, document.myform.list1)">
+</td> 
+<td> 
+    <div class="blackbt">函数黑名单</div>
+    <select  class="blacklist" id="black_list" multiple name="list2" size="12" ondblclick="moveOption(document.myform.list2, document.myform.list1)">
+</select> 
+</td> 
+</tr> 
+</table>
+</form>
+        <input type="submit" value="提交" class="submitbtn" id="btn">
+	</div>
+    <div class="rightbox">
+        <div class="right_text">
+            <div class="bigtitle">
+            <h2>填写说明</h2>
+            </div>
+            <div class="dl_nr">
+            <p><span>过校验：</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;提交直接被调用的并且是应该被屏蔽的函数列表。如果代码中有多个不同的校验函数，需要多次提交，每次提交都保证是一个完整的直接被调用并且是应该被屏蔽的函数列表；提交完成点击下一步。</p>
+            </div>
+        </div>
+        <button type="button" value="下一步" class="nextbtn" onclick=redirct("{{url_for('main.funcchange')}}")>下一步</button>
+    </div>
+</div>
+{#<div class="changebox">#}
+{#    <input type="submit" value="提交" class="submitbtn" id="btn">#}
+{#    <button type="button" value="下一步" class="nextbtn" onclick=redirct("{{url_for('main.funcchange')}}")>下一步</button>#}
+{#</div>#}
+<script language="JavaScript"> 
+function redirct(url=''){
+    top.location=url;
+}
+function addoptions () {
+  var offset = $('#funcitonlist option').length-1;
+  var searchflag = $("#condition").val();
+  if (!searchflag) {
+      searchflag='';
+  }
+  var url = "/features/ajax-func-list/"+offset+"/200/?searchflag="+searchflag;
+  $.get(url, function(result){
+    if (result.glist.length) {
+        for (var i = result.glist.length - 1; i >= 0; i--) {
+            var id = result.glist[i].id;
+            var name = result.glist[i].name;
+            $('#addoptions').remove();
+            $("#funcitonlist").append('<option id=' + id + '>' + id + ':' + name + '</option>');
+        }
+        ;
+        $("#funcitonlist").append('<option id="addoptions">加载更多...                          </option>');
+    }
+   });
+}
+function moveOption(e1, e2){ 
+    try{ 
+        for(var i=0;i<e1.options.length;i++){ 
+            if(e1.options[i].selected&&e1.options[i].id!="addoptions" ){
+                var e = e1.options[i]; 
+                newoption = new Option(e.text, e.value);
+                newoption.id = e.id;
+                e2.options.add(newoption); 
+                e1.remove(i); 
+                i=i-1
+            } 
+        } 
+        document.myform.city.value=getvalue(document.myform.list2); 
+    } 
+    catch(e){} 
+} 
+function changepos(obj,index) 
+{ 
+    if(index==-1){ 
+        if (obj.selectedIndex>0){ 
+            obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex-1)) 
+        } 
+    } 
+    else if(index==1){ 
+        if (obj.selectedIndex<obj.options.length-1){ 
+            obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex+1)) 
+        } 
+    } 
+}
+window.submit_count = 1;
+document.getElementById('btn').onclick=function func() {
+    var blacklist = black_refer();
+    if (blacklist.length > 0) {
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for("main.postblackfunc", _external=True) }}",
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({'funclist': blacklist, 'sc':submit_count}, null, '\t'),
+                success: function(msg){
+                    window.submit_count = window.submit_count + 1;
+                    alertify.success(msg.msg);
+                }
+            });
+        }
+    else {
+      <!--redirct("{{url_for('main.funcchange')}}")-->
+        alertify.error('不能提交空列表!')
+    }
+}
+
+function black_refer(){
+    var blackValueList = new Array(0);
+    var black_list1=document.getElementById('black_list').options;
+    for (var i = black_list1.length - 1; i >= 0; i--) {
+        blackValueList.push(black_list1[i].id);
+    }
+    black_list1.length=0;
+    return blackValueList;
+}
+$(document).ready(function(){
+    $('#funcitonlist').on('click', 'option', function () {
+      if (this.id == 'addoptions') {
+        addoptions();
+      }
+  });
+});
+</script> 
+</body>
+</html>

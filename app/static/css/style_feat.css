@@ -1,0 +1,144 @@
+/*字体样式*/
+@font-face {
+	font-family:'YaHei Consolas Hybrid';
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+* {
+    font-family:"YaHei Consolas Hybrid";
+    font-size:14px;
+  }
+/*fetter use*/
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background:#000000;
+}
+/*滚动条整体*/
+::-webkit-scrollbar{
+    width:14px; /*滚动条宽度*/
+}
+/*滚动条按钮*/
+::-webkit-scrollbar-button {
+
+}
+::-webkit-scrollbar-track{
+    background-color: #444444;
+}
+::-webkit-scrollbar-track-piece{
+    background-color: #444444;
+    -webkit-border-radius:4px;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#1b1b1b;
+    border:solid 1px lightgray;
+    border-radius:4px;
+}
+/*横竖滚动条交角*/
+::-webkit-scrollbar-corner {
+    background-color: #444444;
+}
+/*横竖滚动条交角图案*/
+::-webkit-resizer {
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+/*鼠标滑过滑动条*/
+::-webkit-scrollbar-thumb:hover{
+    background-color: green;
+}
+.unsupported-browser {
+    height: 30px;
+    line-height: 30px;
+    padding: 5px 0 5px 45px;
+    margin: 8px 8px 8px 100px;
+    background: url(ie-notice.png) no-repeat center left;
+    display: none;
+}
+html.lt-ie9 .unsupported-browser {
+    display: block;
+}
+
+.nav-button {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+#docs-list {
+    margin: 50px 8px 8px 8px;
+}
+
+#docs-list .docs {
+    border-bottom: 1px solid #ccc;
+    margin: 12px 0;
+}
+
+html.lt-ie9 #graph-container {
+    display: none;
+}
+
+#split-container {
+    height: 100%;
+    width: 100%;
+}
+
+#graph-container {
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;
+    visibility: hidden;
+}
+
+#docs-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    border-top: 3px solid #ccc;
+    display: none;
+    overflow-y: scroll;
+}
+#docs-close {
+    display: block;
+    position: fixed;
+    font-size: 1.4em;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    right: 8px;
+    background: white;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+}
+#docs-close:hover {
+    background: #ccc;
+}
+#docs-scroll {
+    overflow-y: scroll;
+}
+#docs {
+    padding: 8px;
+}
+
+.docs h2 {
+    font-size: 18px; /* h3 */
+    margin-top: 0;
+}
+.docs h3 {
+    font-size: 16px; /* h4 */
+}
+.docs h2 em, .docs h3 em {
+    font-size: 14px;
+    color: #999;
+    padding-left: 4px;
+    font-style: normal;
+}
+.docs pre {
+    margin: 8px;
+    padding: 4px;
+}
+.docs .select-object.missing {
+    color: #c7254e;
+}

@@ -1,0 +1,27 @@
+body{
+    background-color: #fff;
+    color:#333;
+}
+h1,h2,h3,h4,h5,h6{
+    color:#333;
+}
+.container h1{
+    background-color:#0068B7;
+    margin:0 auto;
+    width:1002px;
+    border-radius: 5px;
+    color:#fff;
+    padding:10px 0;
+}
+.report_info {
+    width:982px;
+    margin:0 auto;
+    box-shadow: 0 0 0 #fff;
+    background-color: #fff;
+}
+.report_info>div>span b {
+    color: #0068B7;
+}
+.report_info>div>span[title]:hover{
+	background: #ddd;
+}

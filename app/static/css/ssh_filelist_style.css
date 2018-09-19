@@ -1,0 +1,205 @@
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background: transparent;
+}
+body {
+     background:url(../images/bg-6.jpg) top center;
+     margin: 0;
+	 padding: 0;
+	 position: relative;
+}
+h1{ font-size:20px;}
+h2{ font-size:18px;}
+h3{ font-size:16px;}
+h4{ font-size:14px;}
+h5{ font-size:12px;}
+h6{ font-size:10px;}
+h1,h2,h3,h4,h5,h6{ color: #edeef2;}
+b, strong{ font-weight:bold;}
+a{ text-decoration: none; }
+a:hover{ text-decoration: underline; }
+/*顶部*/
+.indexheader{
+                width:1002px;
+                margin:0 auto;
+                overflow:hidden;
+              }
+.index_logo img{
+                    float:left;
+                    margin-top:30px;
+                    margin-bottom:30px;
+                 }
+.index_login{
+                float:right;
+                /*margin-top:16px;*/
+                margin-right:30px;
+             }
+.index_login a{
+                    /*line-height:104px;*/
+                    margin-left:20px;
+                    color:#c1c1c1;
+                    display: inline-block;
+                    margin-top:76px;
+                    font-size:14px;
+                }
+/*导航*/
+.index_navbox{
+	background-color:#000000;
+	overflow:hidden;
+	z-index:2;
+	}
+.index_nav{
+   width:1002px;
+   margin:0 auto;
+   overflow:hidden;
+	}
+.index_nav li{
+		float:left;
+		width:120px;
+		text-align:center;
+		margin-right:20px;
+		}
+.index_nav li a{
+		line-height:56px;
+		color:#ececec;
+		/*font-family:"黑体";*/
+		font-size:20px;
+		}
+.index_nav .active{ background-color:#282828;	}
+.index_nav .active a{	color:#13c016;}
+/*内容*/
+.bigleft{
+			  width: 1002px;
+			  min-height: 600px;			  
+              background-color:rgba(67,67,67,0.5);
+              margin:0 auto;
+              border-radius: 5px;
+		  }
+.bigleft h2{
+    color: #f0f7fc;
+    margin:0 auto;
+    padding: 20px;
+
+}
+.file_form{
+    padding:0px 20px 30px 30px;
+}
+.file_form p{
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+.sub_net{
+			float:right;
+			width: 100%;
+			text-align:center;
+            position: fixed;
+            bottom:0;
+            z-index:20;
+            background:rgba(0,0,0,0.3) ;
+			}
+.sub_net button{
+         background-color: #066A07;
+         width: 90px;
+         height: 35px;
+         border: 0;
+         color: #E9EEE9;
+         /*font-family:"黑体"  ;*/
+         font-size:16px;
+         -webkit-border-radius: 5px;
+         -moz-border-radius: 5px;
+         border-radius: 5px;
+         outline: none;
+               
+}
+.file_submit{
+         background-color: transparent;
+         width: 80px;
+         height: 28px;
+         border: 1px solid #12bf18;
+         color: #1bd124;
+         /*font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;*/
+         font-size:16px;
+         margin: 15px 0 15px 130px;
+        
+}
+
+
+.mline{
+	display: inline-block;
+	width:230px;
+	height:35px;
+    margin:5px 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.mline a img{
+    width: 32px;
+    height: 32px;
+    vertical-align:middle;
+}
+.mline label img{
+    width: 32px;
+    height: 32px;
+    vertical-align:top;
+}
+
+.mline label{
+    width: 230px;
+    height: 35px;
+    line-height: 35px;
+    display: inline-block;
+}
+.mline input[type="radio"]{
+  -webkit-appearance: none;
+  background: url(../images/checked.png) no-repeat;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  background-position: -16px -16px;
+  margin: 0;
+  outline:none;
+}
+
+.mline input[type="radio"]:checked {
+  background-position: 0px 0px;
+  margin: 0px;
+}
+.mline:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+.mline a{
+    height: 35px;
+    width: 220px;
+    display:inline-block;
+    font-weight: normal;
+    font-size:14px;
+}
+.mline span{
+    display: inline-block;
+    width: 173px;
+    font-size: 14px;
+    color: #6eff87;
+    line-height: 14px;
+    text-align: left;
+    white-space:pre-wrap;
+    word-break: break-all;
+    word-wrap:break-word;
+}
+ul>a{
+    font-size: 16px;
+}

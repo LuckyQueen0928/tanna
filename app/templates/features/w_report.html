@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <meta charset="utf-8">
+    <title>报告展示</title>
+    <script src="/static/js/echarts.min.js"></script>
+    <script src="/static/jquery.js"></script>
+    <script src="/static/js/jquery-1.10.2.min.js"></script>
+    <script src="/static/js/pagination.js"></script>
+    <link rel="stylesheet" href="/static/css/reportstyle.css" media="screen" title="no title" charset="utf-8">
+    <!--<link rel="stylesheet" href="/static/css/bootstrap.css" media="screen" title="no title" charset="utf-8">-->
+    <link href="/static/css/pagination.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/css/w_reportstyle.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+    <div class="container">
+    	<h1>当前任务报告</h1>
+        <div class="report_info">
+            <div>
+                <span><b>任务ID：</b>{{datadict['task'].tid}}</span>
+                <span><b>任务名：</b>{{datadict['task'].task_name}}</span>
+                <span><b>目标程序：</b>{{app.app_name}}</span>
+                <span><b>总BBL数：</b>{{datadict['bbl_count']}}</span>
+                <span title="{{ large_log.split("'")[-2]}}"><b>运行时长：</b><i class="all_time">{{ large_log.split("'")[-2]}}</i></span>
+                <span><b>迭代次数：</b><i class="count">{{datadict['iterations']}}</i></span>
+                <span><b>迭代周期：</b><i class="time"></i></span>
+            </div>
+        </div>
+        <div class="bll-cover" id='bll-cover'></div>
+        <div class="cover-found" id='cover-found'></div>
+        <div class="line_chart" id='line_chart'></div>
+      	<div class="report_discription" id="wrapper">
+			{% if datadict['expname_list'] %}
+			    <h2>异常文件列表</h2>
+                <div class="differ">
+                    <div class="data_header">
+                        <span>编号</span>
+                        <span>异常文件名</span>
+                    </div>
+                    <section>
+                        <div class="data-container"></div>
+                        <div id="pagination-demo1"></div>
+                    </section>
+                </div>
+            {% else %}
+                <h2><span>异常文件列表</span><span class="info_text"> 当前没有异常文件产生.</span></h2>
+            {% endif %}
+        </div>
+    </div>
+<script type="text/javascript">
+    //TODO 计算页面上的迭代周期 --- by cmf
+    $(function(){
+        var day=0;
+        var str = $(".all_time").text();
+        if(str.indexOf("day")>0){
+            str = str.split(",");
+            day = str[0].split("day")[0];
+            str = str[1];
+        }
+        str = str.split(":");
+        var total_time=day*86400+str[0]*3600+str[1]*60+parseInt(str[2]);
+        day = parseInt(total_time/86400);
+        time = total_time%86400;
+        var hour = parseInt(time/3600)>9?parseInt(time/3600):("0"+parseInt(time/3600));
+        var min = parseInt(time%3600/60)>9?parseInt(time%3600/60):("0"+parseInt(time%3600/60));
+        var sec = parseInt(time%3600%60)>9?parseInt(time%3600%60):("0"+parseInt(time%3600%60));
+        var all_hour = day*24+parseInt(hour);
+        if(all_hour==0&&min==0){
+            $(".all_time").text(sec+"秒");
+        }else if(all_hour==0&&min!=0){
+            $(".all_time").text(min+"分"+sec+"秒");
+        }else{
+            $(".all_time").text(all_hour+"时"+min+"分"+sec+"秒");
+        }
+
+        var count = $(".count").text();
+        var cycle = 0;
+        if(count==0){
+            cycle=total_time;
+        }else{
+            cycle=parseInt(total_time/count);
+        }
+        var cy_day = 0;
+        cy_day = parseInt(cycle/86400);
+        cycle = cycle%86400;
+        var cy_hour = parseInt(cycle/3600)>9?parseInt(cycle/3600):("0"+parseInt(cycle/3600));
+        var cy_min = parseInt(cycle%3600/60)>9?parseInt(cycle%3600/60):("0"+parseInt(cycle%3600/60));
+        var cy_sec = parseInt(cycle%3600%60)>9?parseInt(cycle%3600%60):("0"+parseInt(cycle%3600%60));
+        var txt = cy_day>0?(cy_day+"day,"+cy_hour+":"+cy_min+":"+cy_sec):(cy_hour+":"+cy_min+":"+cy_sec);
+        var all_cy_hour = cy_day*24+parseInt(cy_hour);
+        if(all_cy_hour==0&&cy_min==0){
+            $(".time").text(cy_sec+"秒");
+        }else if(all_cy_hour==0&&cy_min!=0){
+            $(".time").text(cy_min+"分"+cy_sec+"秒");
+        }else{
+            $(".time").text(all_cy_hour+"时"+cy_min+"分"+cy_sec+"秒");
+        }
+        $(".time").parent().attr("title",txt);
+    });
+</script>
+<script>
+    /* 异常文件列表 纯前端分页显示*/
+    $(function () {
+        function createDemo(name) {
+            var container = $('#pagination-' + name);
+            var sources = function () {
+                var result = [{% if datadict['expname_list'] %}{% for exp in datadict['expname_list'] %}'<span>{% set no = no + 1 %}{{ no }}</span><span><a href={{ url_for("features.exception", exceptionname=exp) }} target=_blank>{{ exp }}</a></span>',{% endfor %}];
+            {% else %}
+                ];
+            {% endif %}
+                return result;
+            }();
+            var options = {
+                dataSource: sources,
+                callback: function (response, pagination) {
+                    window.console && console.log(response, pagination);
+                    var dataHtml = '<ul>';
+                    $.each(response, function (index, item) {
+                        dataHtml += '<li>' + item + '</li>';
+                    });
+                    dataHtml += '</ul>';
+                    container.prev().html(dataHtml);
+                }
+            };
+            //$.pagination(container, options);
+            container.addHook('beforeInit', function () {
+                window.console && console.log('beforeInit...');
+            });
+            container.pagination(options);
+            container.addHook('beforePageOnClick', function () {
+                window.console && console.log('beforePageOnClick...');
+                //return false
+            });
+            return container;
+        }
+        createDemo('demo1');
+    });
+</script>
+
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('bll-cover'));
+    option = {
+        title : {
+            text: '当前BBL覆盖率',
+            subtext: '已覆盖的BBL数/BBL总数',
+            x:'center',
+            textStyle:{fontWeight:'bold',color:'#333'},
+            subtextStyle: {color: '#333' }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['已覆盖BBL数','未覆盖BBL数'],
+            textStyle:{fontWeight:'bold', color:'#333'}
+        },
+        color:['#6CA80C', '#666'],
+        series : [
+            {
+                name: '覆盖率',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:{{ datadict['has_cover'] }}, name:'已覆盖BBL数'},
+                    {value:{{ datadict['bbl_count'] - datadict['has_cover'] }}, name:'未覆盖BBL数'}
+                    ],
+               itemStyle:{
+                            normal:{
+                                label:{
+                                   show: true,
+                                   formatter: '{b} :\n {c} ({d}%)'
+                                   },
+                                labelLine :{show:true}
+                               }
+                           }
+                     }
+        ]
+    };
+      myChart.setOption(option);
+</script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('cover-found'));
+    option = {
+        title : {
+            text: '覆盖和探测比',
+            subtext: '已覆盖/已探测的BBL',
+            x:'center',
+            textStyle:{fontWeight:'bold', color:'#333'},
+            subtextStyle: {color: '#333' }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['已覆盖BBL数','已探测未覆盖BBL数'],
+            textStyle:{fontWeight:'bold', color:'#333'}
+        },
+        color:['#6CA80C', '#FF612A'],
+        series : [
+            {
+                name: '覆盖率',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:{{ datadict['has_cover'] }}, name:'已覆盖BBL数'},
+                    {value:{{ datadict['has_found'] }}, name:'已探测未覆盖BBL数'}
+                ],
+                itemStyle:{
+                            normal:{
+                                label:{
+                                   show: true,
+                                   formatter: '{b} :\n {c} ({d}%)'
+                                   },
+                                labelLine :{show:true}
+                               }
+                           }
+                     }
+        ]
+    };
+      myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('line_chart'));
+    option = {
+        tooltip: {
+            show:true,
+            trigger: 'axis',
+            formatter: '{c} ',
+            position:function(p){
+                return[p[0]+10,p[1]-10];
+            }
+        },
+        legend: {
+            data:['覆盖数'],
+            textStyle:{fontWeight:'bold', color:'#333'}
+        },
+        calculable : false,
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '12%',
+            containLabel: true
+        },
+        /*
+		toolbox: {
+            show:true,
+            feature: {
+                saveAsImage:
+                {
+                    show : true,
+                    title : '保存为图片',
+                    type : 'png',
+                    lang : ['点击保存']
+                }
+            }
+        },
+		*/
+         xAxis: {
+             min:0,
+             boundaryGap: true,
+             axisLine : {    // 轴线
+                show: true,
+                lineStyle: {
+                                color: '#ecf1de',
+                                type: 'solid',
+                                width: 2
+                            }
+            },
+            axisTick : {    // 轴标记
+                show:true,
+                length: 10,
+                lineStyle: {
+                                color: 'green',
+                                type: 'solid',
+                                width: 2
+                            }
+            },
+            axisLabel : {
+                show:true,
+                interval: 'auto',    // {number}
+                margin: 15,
+                formatter: '{value}',
+                textStyle: {
+                                color: '#333',
+                                fontFamily: 'sans-serif',
+                                fontSize: 14,
+                                fontStyle: 'italic',
+                                fontWeight: 'bold'
+                            }
+            },
+            splitLine : {
+                show:true,
+                lineStyle: {
+                    color: '#B2B2B2',
+                    type: 'dashed',
+                    width: 1
+                }
+            },
+            splitArea : {
+                show: true,
+                areaStyle:{
+                    color:['#fff','#fff']
+                }
+            },
+            data:[{{ large_log|safe }}]
+        },
+        yAxis: {
+            name:'覆盖数',
+            nameTextStyle:{fontSize: 13,fontWeight: 'bold'},
+            type : 'value',
+            position: 'left',
+            min: 0,
+            splitNumber: 10,
+            boundaryGap: [0,0.1],
+            axisLine : {    // 轴线
+                show: true,
+                lineStyle: {
+                    color: '#666',
+                    type: 'dashed',
+                    width: 2
+                }
+            },
+            axisTick : {    // 轴标记
+                show:true,
+                length: 10,
+                lineStyle: {
+                    color: 'green',
+                    type: 'solid',
+                    width: 2
+                }
+            },
+            axisLabel : {
+                show:true,
+                interval: 'auto',    // {number}
+                margin: 18,
+                formatter: '{value}',    // Template formatter!
+                textStyle: {
+                    color: '#333',
+                    fontFamily: 'verdana',
+                    fontSize: 10,
+                    fontStyle: 'normal',
+                    fontWeight: 'bold'
+                }
+            },
+            splitLine : {
+                show:true,
+                lineStyle: {
+                    color: '#333',
+                    type: 'dotted',
+                    width: 2
+                }
+            },
+            splitArea : {
+                show: true,
+                areaStyle:{
+                    color:['#ddd','#ddd']
+                }
+            }
+        },
+         dataZoom : {
+             show : true,
+             backgroundColor:'#c9c9c9',
+             fillerColor:'#0068B7',
+             handleColor:'green',
+             handleSize:30,
+             start : 0,
+             end : 100
+         },
+        series: [
+            {
+                name:'覆盖数',
+                nameStyle:{fontWeight:'bold', color:'black'},
+                type:'line',
+                stack: '总量',
+                data:[{% for log in  datadict['cover_log'] %}{{ log.coverage }},{% endfor%}]
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta  http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>全局路径</title>
+  <script src="/static/jquery.js"></script>
+    <style>
+  .error {color:red;font-weight:bold;}
+    </style>
+<script>
+  window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')
+</script>
+  <script src="/static/js/jquery.cookie.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/nbitstyle.css"/>
+  <link rel="stylesheet" href="/static/css/alertify.core.css" />
+  <link rel="stylesheet" href="/static/css/alertify.default.css" />
+  <script src="/static/js/alertify.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){});
+    function slideToggle(){
+    $("#footer").slideToggle(1000);
+    }
+    function toggle(){
+    $("#footer").toggle(1000);
+    }
+  </script>
+</head>
+<body>
+<script type="text/javascript">
+  function reflashViews(){
+    $('#fetter-view').attr('src', $('#fetter-view').attr('src'));
+    $('#bbl-fetter').attr('src', $('#bbl-fetter').attr('src'));
+    $('#func-src-info').attr('src', $('#func-src-info').attr('src'));
+  }
+  $(document).ready(function(){
+    $('#funclist').on('click', 'option', function () {
+      if (this.id != 'addoptions') {
+        $.cookie("nodeid", this.id, {expires: 7, path: '/features'});
+        reflashViews();
+      }else{
+        addoptions();
+      }
+  });
+  $("#footer button").click(function(){
+  $(this).addClass("current").siblings().removeClass("current")
+  })
+    $('#jump').click(function(){
+      reflashViews();
+    });
+    $('#bbl-viewed').click(function(){
+      $('#bbl-fetter').attr('src', $('#bbl-fetter').attr('src'));
+    });
+    $('#fsi-viewed').click(function(){
+      $('#func-src-info').attr('src', $('#func-src-info').attr('src'));
+    });
+    $('#Sensitive-exec').click(function(){
+      get_ajax('{{ url_for("features.add_Sensitive_exec", _external=True) }}');
+    });
+
+    $('#fuzz-submit').click(function () {
+      get_ajax('{{ url_for("features.fuzz_submit", _external=True) }}');
+    });
+    $('#cur-algorithm').click(function () {
+      get_ajax('{{ url_for("features.c_algorithm", _external=True) }}');
+    });
+    $('#state-change').click(function(){
+      $.ajax({
+        url: '{{ url_for("features.current_index", _external=True) }}',
+        dataType: "json",
+        success: function(response) {
+          change_index(response.action_index);
+        },
+        error: function(){
+          alertify.error('获取当前状态失败，请检查服务器连接');
+        }
+      });
+    });
+  });
+  function change_index(index){
+    var str_msg = "当前状态为状态"+ index +"，请输入您要跳转的状态号。"
+    alertify.prompt(str_msg, function (e, str) {
+        if (str) {
+          $.post("{{ url_for("features.change_index", _external=True) }}",
+          {new_index : str},
+          function(data, status){
+            if(data.action_index){
+              alertify.success(data.msg);
+            }
+            else {
+              alertify.error(data.msg);
+            }
+          });
+        } else {
+          alertify.error('您取消了状态更改。');
+        }
+    }, "请输入状态号");
+  }
+  function selectFirst(){
+     get_ajax("{{ url_for('features.changeAlgorithm') }}");
+  }
+  function get_ajax(s_url) {
+    $.ajax({
+      url: s_url,
+      jsonp: "callback",
+      dataType: "json",
+      success: function(response) {
+        alertify.set({ delay: 10000 });
+        if (response.status == 0){
+          alertify.error(response.msg);
+        }if (response.status == 1) {
+          alertify.success(response.msg);
+        }
+      }
+    });
+  }
+  $.cookie("nodeid", "{{ hex(gnodelist[0].id) }}",{expires: 7, path: '/features'});
+</script>
+  <form id="func-form">
+  <div id='click-view' >
+    <input type="button" id='footer-conctrl' value="功&nbsp;能&nbsp;栏" onclick="slideToggle()" style="font-weight: bold"/>
+    <input type="text" id='condition' class="inputline" autocomplete="off"/>
+    <input type="button" value="搜索" class="searchline" onclick="search()">
+  </div>
+  <div class="sel-box" id='selectbox'>
+    <select id="funclist" size="23" style="padding-top: 1px">
+    {% for gnode in gnodelist %}
+      <option id="{{ hex(gnode.id) }}" title="{{ gnode.name }}">{{ hex(gnode.id) }}:{{ gnode.name }}</option>
+    {% endfor %}
+    <option id="addoptions">加载更多...                          </option>
+    </select>
+  </div>
+  </form>
+    <iframe id="fetter-view" src="{{ url_for('features.featfetter') }}"></iframe>
+    <iframe id="bbl-fetter" src="{{ url_for('features.fetter_bbl')}}" ></iframe>
+    <iframe id="func-src-info" src="{{ url_for('features.func_src_info', page=1)}}" ></iframe>
+    <div id="footer" class='bar' style="display:none;">
+      <button onclick="toindex()" class="nomalone">任务列表</button>
+      <button id="jump" class="nomalone current">中心跳转</button>
+      <button id="bbl-viewed" class="nomalone">查看BBL</button>
+      <button id="fsi-viewed" class="nomalone">查看汇编</button>
+      <button id="BBL-show" onclick="BBLshow()" class="nomalone">BBL全屏</button>
+      <button id="fsi-show" class="nomalone" onclick="fsi_show()">汇编全屏</button>
+      <!--<button id="fsi-show" class="nomalone" onclick="tracelist()">偏移列表</button>-->
+      <!-- <button id="state-change" class="nomalone">更改状态</button> -->
+      <button id="Sensitive-exec" class="nomalone">敏感点逼近</button>
+      <button id="setting" class="nomalone" onclick="settings()">设置</button>
+      <button id="to-symbolic" class="nomalone" onclick="selectFirst()" >算法转换</button>
+      <!-- <button id="fuzz-submit" class="nomalone">提交Fuzz点</button> -->
+      <!-- <button id="cur-algorithm" class="nomalone" >当前状态</button> -->
+      <button id="view-report" onclick="viewReport()" class="nomalone">查看报告</button>
+      <button id="fsi-show" class="nomalone" onclick="tracelist()">Trace列表</button>
+      <!-- <button id="view-report" onclick="fuzzOnlying()" class="nomalone">FUZZONLY</button> -->
+      <button id="resume_break_point "onclick="show_uplode_breakpoint()" class="nomalone">断点续测</button>
+      <button id="turning_point " onclick="show_turningpoint()" class="nomalone">敏感点信息</button>
+    </div>
+ <script type="text/javascript">
+     //配置功能栏的路径
+      function toindex() { window.location.href = "{{ url_for('main.index') }}"; }
+      function viewReport() {window.open(" {{ url_for('features.report', taskid=taskid)}}")}
+      function BBLshow() {window.open(" {{ url_for('features.fetter_bbl') }} ")}
+      function fsi_show() {window.open(" {{ url_for('features.func_src_info', page=1) }} ")}
+      function settings() {window.open(" {{ url_for('features.process_conctrl') }} ")}
+      function tracelist() {window.open(" {{ url_for('features.tracelist') }} ")}
+      function show_uplode_breakpoint() { window.open("{{ url_for('main.Incremental') }}");}
+      function show_turningpoint()  {window.open(" {{ url_for('features.turningpoint') }} ")}
+      function tracelist() {window.open(" {{ url_for('features.tracelist') }} ")}
+     //禁用Enter键表单自动提交
+     document.onkeydown = function(event) {
+           var target, code, tag;
+           if (!event) {
+             event = window.event;
+               target = event.srcElement;
+             code = event.keyCode;
+               if (code == 13) {
+                  tag = target.tagName;
+               if (tag == "TEXTAREA") { return true; }
+                  else { return false; }
+               }
+          }
+           else {
+               target = event.target;
+              code = event.keyCode;
+             if (code == 13) {
+                  tag = target.tagName;
+                   if (tag == "INPUT") { return false;search(); }
+                   else { return true; }
+               }
+            }
+      };
+//调整功能栏高度
+$("#footer button").click(function(){
+   $(this).addClass("current").siblings().removeClass("current")
+});
+
+$(function(){
+    re_select_height();
+});
+
+    function re_select_height () {
+      var option = $("#funclist").find("option");
+      var sh= option.length*($('option').height()+1);
+      var sw = 0;
+      option.each(function(){
+        var thisH = $(this).text().length*7;
+        sw = (thisH>sw)?thisH:sw;
+      })
+      $("#funclist").css({width:sw,height:sh});
+      $("#fetter-view").scrollLeft(200);
+    }
+    //搜索功能
+    var funclistOpt = $("#funclist option");
+    $(document).ready(function (){
+          $("#condition").keyup(function(){
+                search();
+        });
+    });
+    function search(){
+      var resultlist = new Array();
+      var searchtarget=$("#condition").val();
+      searchtarget = searchtarget.replace(/_/g,"\\\_");
+      searchtarget = searchtarget.replace(/%/g,"\\\%");
+       $("#funclist").empty();
+       $('#selectbox').append('<select id="funclist" size="23" style="padding-top: 1px"></select>');
+       $.get('/features/ajax-func-list/0/200/?searchflag='+searchtarget, function(result){
+          if (result.glist.length){
+            console.log(result.glist.length);
+            for (var i = result.glist.length - 1; i >= 0; i--) {
+            var id=result.glist[i].id;
+            var name=result.glist[i].name;
+            $("#funclist").append('<option id='+id+'>'+id+':'+name+'</option>');
+          };
+          $("#funclist").append('<option id="addoptions">加载更多...                          </option>');
+          re_select_height()
+          }
+       });
+    }
+    //加载option
+    function addoptions () {
+      var offset = $('#funclist option').length-1;
+      console.log(offset);
+      var searchflag = $("#condition").val();
+      var url = "/features/ajax-func-list/"+offset+"/200/?searchflag="+searchflag;
+      $.get(url, function(result){
+          if (result.glist.length){
+            for (var i = result.glist.length - 1; i >= 0; i--) {
+            var id=result.glist[i].id;
+            var name=result.glist[i].name;
+            $('#addoptions').remove();
+            $("#funclist").append('<option id='+id+'>'+id+':'+name+'</option>');
+          };
+          $("#funclist").append('<option id="addoptions">加载更多...                          </option>');
+          re_select_height();
+          }
+       });
+    }
+    //功能栏大小
+    var ScreenW=$(document.body).width();
+    var ButtonNum=22;
+    var SumButton=($('#footer button').width()+10)*ButtonNum;
+    if (SumButton>=ScreenW)
+    {
+        $("#footer").css("height",'120px');
+        $("#footer").css("line-height",'50px');
+    }
+</script>
+</body>
+</html>

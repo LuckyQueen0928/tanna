@@ -1,0 +1,8 @@
+@font-face { 
+	font-family:'YaHei Consolas Hybrid'; 
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+ body{
+  font-family:'YaHei Consolas Hybrid';
+  color:#ececec;
+ }

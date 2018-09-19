@@ -1,0 +1,104 @@
+
+body {
+    background: url(../images/w_bg-4.jpg) top center;
+}
+h1{
+    font-size: 20px;
+}
+.netupload h2{
+    color:#666;
+}
+.daice{
+    color:#666;
+}
+.daice h3 {
+    color:#066A07;
+}
+.daice input{
+    color:#666;
+}
+button{
+    background-color: #0068B7;
+}
+.bigtop {
+    background-color: #fff;
+}
+
+#confirm{
+	 position:absolute;
+	 top:0;
+	 left:0;
+	 right:0;
+	 bottom:0;
+	 background: rgba(0, 0, 0, 0.5);
+	 z-index: 100;
+	 display: none;
+	 min-height: 768px;
+
+ }
+#confirm .confirm-info{
+	 position: absolute;
+	 top:6%;
+	 left:25%;
+	 width: 50%;
+	 height: 450px;
+	 background-color: #dddddd;
+	 border-radius: 5px;
+	 padding:30px;
+	 padding-left:0;
+	 padding-right:0;
+	 overflow:hidden;
+ }
+#confirm .confirm-info p span{
+	font-size:16px;
+}
+.confirm-info p{
+	margin:0;
+	padding:10px;
+	padding-top:8px;
+	padding-bottom:8px;
+	border-radius: 5px;
+}
+.confirm-info p span:first-child{
+	display:inline-block ;
+	margin-right:6px;
+	color:#F57608;
+}
+.confirm-info p:hover{
+	background-color: #0068B7;
+}
+#confirm .confirm-info h1{
+	color:#333;
+	text-align:center;
+	/*margin-top:20px;*/
+	margin-bottom: 10px;
+}
+#confirm .del,#confirm .succ{
+	border:0;
+	outline: none;
+	width:120px;
+	height:40px;
+	background-color:#0068B7;
+	border-radius: 5px;
+	text-align:center;
+	line-height: 40px;
+	color:white;
+	font-size:16px;
+	font-weight: bold;
+}
+.text{
+	width:80%;
+	padding-left:6%;
+	padding-right:4%;
+
+}
+.text p span{
+	color:#333;
+}
+.btn{
+	margin-top:30px;
+	text-align: center;
+}
+input[type="radio"]{
+	outline: none;
+}

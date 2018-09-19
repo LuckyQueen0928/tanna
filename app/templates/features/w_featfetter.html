@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class=$.ajax({
+  url: '{{ url_for("features.w_add_Sensitive_exec", _external=True) }}',
+  jsonp: "callback",
+  dataType: "json",
+  success: function(response) {
+    alertify.set({ delay: 10000 });
+    if (response.status == 0){
+      alertify.error(response.msg);
+    }if (response.status == 1) {
+      alertify.success(response.msg);
+    }
+  }
+});"lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>关联路径图</title>
+        <!-- <link rel="stylesheet" href="/static/css/bootstrap.css"> -->
+        <link rel="stylesheet" href="/static/css/style_feat.css">
+        <link rel="stylesheet" href="/static/css/svg.css">
+        <script src="/static/js/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/css/nprogress.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/w_nprogress.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/w_scroll.css"/>
+        <script src="/static/js/nprogress.js"></script>
+        <script type="text/javascript">
+          NProgress.start();
+        </script>
+        <script>
+          function tintnode(){
+            mainnode = $('g#' + '{{ mainnode }}');
+            mainnode.children("rect").attr("fill","#FF0000");
+            mainnode.children("rect").attr("stroke","#FF0000");
+            $.ajax({
+              url: '{{ url_for("features.w_g_tint_json", _external=True) }}',
+              jsonp: "callback",
+              dataType: "json",
+              success: function(response) {
+                l = response.nodes;
+                for (var i = 0; i < l.length; i++) {
+                  node =$('g#' + l[i]);
+                  node.children("rect").attr("fill","#26D82F");
+                }
+              }
+            });
+          }
+          setInterval(tintnode, 10*1000);
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+        <div class="unsupported-browser">
+            This website does not fully support your browser.  Please get a
+            better browser (Firefox or <a href="/chrome/">Chrome</a>, or if you
+            must use Internet Explorer, make it version 9 or greater).
+        </div>
+        <![endif]-->
+        <div id="split-container">
+            <div id="graph-container">
+                <div id="graph"></div>
+            </div>
+            <div id="docs-container">
+                <!-- <a id="docs-close" href="#">&times;</a> -->
+                <div id="docs" class="docs"></div>
+            </div>
+        </div>
+        <script src="/static/js/jquery.browser.min.js"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
+        <script src="/static/js/d3.v3.min.js"></script>
+        <script src="/static/js/colorbrewer.js"></script>
+        <script src="/static/js/geometry.js"></script>
+        <script>
+        var config = {
+          "title": "Database process documentation",
+          "graph": {
+            "linkDistance": 300,
+            "charge": -400,
+            "height": 2000,
+            "numColors": 12,
+            "labelPadding": {
+              "left": 3,
+              "right": 3,
+              "top": 2,
+              "bottom": 2
+            },
+            "labelMargin": {
+              "left": 3,
+              "right": 3,
+              "top": 4,
+              "bottom": 4
+            },
+            "ticksWithoutCollisions": 50
+          },
+          "types": [],
+          "constraints": [],
+          "jsonUrl": "{{ url_for('features.w_featfetter_json') }}"
+        };
+        </script>
+        <script src="/static/js/script.js"></script>
+        <script type="text/javascript">
+        NProgress.done();
+         //双击全屏显示
+          $(function() {
+             var flag=true;
+           if(window.location.href!=top.location.href){
+                 flag=true;
+             }else{
+               flag=false;
+           }
+             if(flag==true) {
+                 $("body").dblclick(function () {
+                     window.open(" {{ url_for('features.w_featfetter') }} ")
+                 });
+             }
+            })
+
+        </script>
+    </body>
+</html>

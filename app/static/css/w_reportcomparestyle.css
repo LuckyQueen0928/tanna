@@ -1,0 +1,14 @@
+body{
+    background-color: #fff;
+}
+h1,h2,h3,h4,h5,h6{
+    color:#333;
+}
+.heater h1{
+    background-color:#0068B7;
+    margin:0 auto;
+    width:1002px;
+    border-radius: 5px;
+    color:#fff;
+    padding:10px 0;
+}

@@ -1,0 +1,32 @@
+body{
+    background-color:#9DC9ED;
+}
+#funclist {
+    background-color:#9DC9ED;
+    color:#333;
+}
+select[size], select[multiple], select[size][multiple] {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #fff;
+    border-image: initial;
+}
+#footer-conctrl {
+    background-color: #17AE15;
+    color: #fff;
+}
+#footer{
+    background-color: #fff;
+}
+.nomalone {
+    color:#333;
+    border-color: #000;
+}
+.current {
+    background-color: #3879D9;
+    border-color: #76b7ea;
+    color:#fff;
+}
+.sel-box{
+    background-color: #9DC9ED;
+}

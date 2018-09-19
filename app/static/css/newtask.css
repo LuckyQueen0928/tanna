@@ -1,0 +1,124 @@
+@charset "utf-8";
+body{ 
+     background:url(../images/enbei-2-bg.jpg) top center;
+     margin:0;
+     padding:0;
+     font-size: 100%;
+     font-size:14px;
+    }
+a{
+	text-decoration:none;
+	color:#ffffff;
+
+ }
+ul,li{ list-style:none;}
+h1,h2,h3,h4,h5{ margin:0px; padding:0px;}
+input,button,select,textarea{outline:none}
+textarea{resize:none}
+/*顶部*/
+.indexheader{
+                width:1002px;
+                margin:0 auto;
+                overflow:hidden;
+              }
+.index_logo img{
+                  float:left;
+                  margin-top:30px;
+                  margin-bottom:30px;
+                 }
+.index_login{
+                float:right;
+                /*margin-top:16px;*/
+                margin-right:30px;
+             }
+.index_login a{
+                    /*line-height:104px;*/
+                    margin-left:20px;
+                    color:#c1c1c1;
+                    display: inline-block;
+                    margin-top:76px;
+                    font-size:14px;
+                }
+/*导航*/
+.index_navbox{
+                background-color:#000000;
+                overflow:hidden;
+                z-index:2;
+                }
+.index_nav{
+            width:1002px;
+            margin:0 auto;
+            overflow:hidden;
+            }
+.index_nav li{
+                float:left;
+                width:120px;
+                text-align:center;
+                margin-right:20px;
+               }
+.index_nav li a{
+                    line-height:56px;
+                    color:#ececec;
+                    /*font-family:"黑体";*/
+                    font-size:20px;
+                 }
+.index_nav .active{
+                     background-color:#282828;
+                     }
+.index_nav .active a{
+                        color:#13c016;
+                       }
+/*中间内容*/
+.taskbigbox{
+                width:900px;
+                margin:0 auto;
+             }
+.taskname{
+            float: left;
+            color:#c6c6c6;
+            font-size:16px;
+            margin-left:0;
+            margin-top: 30px;
+          }
+.taskinfo{
+            float: left;
+            width:700px;
+            height:100px;
+            color:#c6c6c6;
+            font-size:16px;
+            line-height:64px;
+            margin-left:0;
+            margin-top: 15px;
+         }
+.inputname{
+            vertical-align: top;
+            width:600px;
+            height:30px;
+            line-height: 30px;
+            background-color:transparent;
+            color:#c6c6c6;
+            font-size:16px;
+            border:2px solid #838383;
+            margin-left:10px;
+            }
+.inputinfo{
+            vertical-align:top;
+            width:600px;
+            height:200px;
+            background-color: transparent;
+            color:#c6c6c6;
+            font-size:16px;
+            border:2px solid #838383;
+            margin-left:10px;
+            margin-top:20px;
+            }
+.tasksubmit{
+             width:90px;
+             height:35px;
+             border:0;
+             color: #E9EEE9;
+             background-color: #066A07;
+             font-size:16px;
+             margin-left:610px;
+             margin-top:150px;
+            }

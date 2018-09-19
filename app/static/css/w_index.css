@@ -1,0 +1,91 @@
+body{
+    background-color:#fff;
+    /*background:url("/static/images/w_mainbg.png") no-repeat 0 center;*/
+    /*background-color: #6CA7F2;*/
+    color:#333;
+}
+a{
+    color:#333;
+}
+.index_login a{
+    color:#CBCBCB;
+}
+.indexheader {
+    background-color: #0068B7;
+}
+.index_nav{
+    background-color: #0068B7;
+}
+.index_nav li a{
+    color:#fff;
+}
+.index_navbox {
+    background-color: #fff;
+}
+.index_nav .active {
+    background-color: #4D96CD;
+}
+.index_nav .active a{
+    color:#fff;
+}
+.index_login a {
+    margin-top:30px;
+}
+.center_bg {
+    background-color: #fff;
+    /*background-color: transparent;*/
+}
+.index_task1,.index_task2,.index_task4,.index_task5,.index_task6,.index_task7{
+    border-bottom:1px solid #B9E064;
+    border-top:1px solid #B9E064;
+    background-color: #8FC31F;
+    color:#fff;
+    font-weight: 600;
+}
+.index_number1,.index_number2,.index_number4,.index_number5,.index_number6,.index_number7{
+    border-bottom:1px solid #ddd;
+    background-color: transparent;
+}
+.taskname a:hover {
+    color: #0068B7;
+}
+tbody tr:nth-child(2n+1){
+    background-color: #E5E5E5;
+}
+tbody tr:nth-child(2n){
+    background-color: #fff;
+}
+.report a{
+    color:#ED6F22;
+}
+.report:hover a{
+    color: #CB5008;
+}
+.pagefirst {
+    background-color: #00A0D2;
+    border-color: #0068B7;
+}
+.nowyema {
+    background-color: #00A0D2;
+    color:#F0EC78;
+    border-color: #0068B7;
+}
+.pagelast {
+    background-color: #00A0D2;
+    border-color: #0068B7;
+}
+.newtask {
+    background: url(/static/images/w_xinjianrenwu.png) no-repeat;
+}
+.deletetask {
+    background: url(/static/images/w_shanchurenwu.png) no-repeat;
+}
+#changpage{
+    color:#333;
+}
+.index_container {
+    background-color: rgba(255,255,255,0.5);
+}
+.alertify-message{
+    color:#333;
+}

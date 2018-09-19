@@ -1,0 +1,175 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/bootflatly.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/static/css/nbitstyle.css">
+<link rel="stylesheet" type="text/css" href="/static/css/uploadfile.css">
+<link rel="stylesheet" type="text/css" href="/static/css/w_header.css">
+<link rel="stylesheet" type="text/css" href="/static/css/w_uploadfile.css">
+<script src="/static/js/nbit.js"></script>
+<script src="/static/jquery.js"></script>
+</head>
+<body>
+<!--首页logo部分-->
+<div class="bigtop">
+<div class="indexheader">
+	<div class="index_logo">
+    <img src="/static/images/w_logo.png">
+    </div>
+    <div class="index_login">
+        <a href="{{ url_for('auth.resetpassword') }}" target="_blank">重置密码</a>
+        <a href="{{ url_for('auth.logout') }}" target="_blank">退出登录</a>
+    </div>
+</div>
+</div>
+<!--导航-->
+<div class="index_navbox">
+<ul class="index_nav">
+    <li><a href={{ url_for('main.login_guide') }}>首页</a></li>
+    <li><a href={{ url_for('main.w_index') }}>任务管理</a></li>
+    <li class="active"><a href="/w_newtask/">新建任务</a></li>
+    <li><a href="">关于</a></li>
+</ul>
+</div>
+<!--中间内容-->
+<div class="netupload">
+    <form id="data" method="post" enctype="multipart/form-data">
+    <h2>上传所需文件：</h2>
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3>目标程序源码：</h3>
+        <input type="file" name="source-zip" id="sourcefile" class="filechance1" onclick="tishi()" onchange="sourcefile_onselect()" />
+        （Zip压缩格式）
+      </div>
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3> XML文件：<span style="color:red;">*</span></h3>
+        <input type="file" name="xml" id="xmlfile" class="filechance" onclick="tishi()" onchange="xmlfile_onselect()" />
+      </div>
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3> Sample文件：<span style="color:red;">*</span></h3>
+        <input type="file" name="sample" id="samplefile" class="filechance" onclick="tishi()" onchange="samplefile_onselect()" />
+      </div>
+      <div class="daice">
+        <img src="/static/images/smalldian.jpg"><h3> Process文件：<span style="color:red;">*</span></h3>
+        <input type="file" name="process" id="processfile" class="filechance" onclick="tishi()" onchange="processfile_onselect()" />
+      </div>
+        <div>
+            <button type="button" onclick ="javascript:history.go(-1);">上一步</button>
+            <button class="tijiao" type="button" >提交</button>
+        </div>
+    </form>
+</div>
+<div id="confirm" >
+    <div class="confirm-info">
+        <h1>任务信息</h1>
+        <div class="text">
+            <p><span>任务名称:</span><span>{{ htmltaskname }}</span></p>
+            <p><span>任务描述:</span><span>{{ htmltaskinfo }}</span></p>
+            <br>
+            <p><span>程序源码:</span><span id="con_sourcefile"></span></p>
+            <p><span>XML文件:</span><span id="con_xmlfile"></span></p>
+            <p><span>Sample文件:</span><span id="con_samplefile"></span></p>
+            <p><span>Process文件:</span><span id="con_processfile"></span></p>
+        </div>
+        <div class="btn">
+            <input type="button" class="del" value="取消">
+            <input type="submit" form="data" class="succ" value="确定">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#data .tijiao').click(function(){
+        $('#con_sourcefile').html(get_filename($("#sourcefile").val()));
+        $('#con_xmlfile').html(get_filename($("#xmlfile").val()));
+        $('#con_samplefile').html(get_filename($("#samplefile").val()));
+        $('#con_processfile').html(get_filename($("#processfile").val()));
+        $('#confirm').show();
+        //运行平台
+        var textPlatform=$('#platform').html();
+         console.log(textPlatform);
+         if(textPlatform==1)
+           textPlatform="[x64]";
+         else if(textPlatform==0)
+           textPlatform="[x86]";
+         $('#platform').html(textPlatform);
+    });
+    $('#confirm .del').click(function(){
+        $('#confirm').hide()
+    });
+    $(function(){
+        $(':text').focus(function(){
+            this.select();
+        });
+    });
+
+});
+
+$(function(){
+	$("#data").submit(function(){
+		var ifsub = true;
+		$(".filechance").each(function(){
+			var val = $.trim($(this).val());
+			if(val=="" || val==null){
+				ifsub = false;
+			}
+		});
+		if(!ifsub){
+			alert("xml文件、sample文件和目标程序文件必须上传，不能为空");
+			return false;
+		}
+	})
+});
+//提示信息
+function tishi() {
+    return
+    //alert("请选择zip文件:");
+}
+//获取指定路径文件名  ---by cmf
+function get_filename(path){
+    var arr=path.split('\\');
+    var name=arr[arr.length-1];//这就是要取得文件名称
+    return name;
+}
+//获取文件名后缀
+function sourcefile_onselect()
+{
+    var str=$("#sourcefile").val();
+    var arr=str.split('\\');
+    var my=arr[arr.length-1];//这就是要取得文件名称
+    var last=my.split('.');
+    var laststr=last[last.length-1];
+}
+function xmlfile_onselect()
+{
+    var str=$("#xmlfile").val();
+    var arr=str.split('\\');
+    var my=arr[arr.length-1];//这就是要取得文件名称
+    var last=my.split('.');
+    var laststr=last[last.length-1];
+    // alert("你选择的文件类型为："+laststr);
+}
+function samplefile_onselect()
+{
+    var str=$("#samplefile").val();
+    var arr=str.split('\\');
+    var my=arr[arr.length-1];//这就是要取得文件名称
+    var last=my.split('.');
+    var laststr=last[last.length-1];
+}
+function processfile_onselect()
+{
+    var str=$("#processfile").val();
+    var arr=str.split('\\');
+    var my=arr[arr.length-1];//这就是要取得文件名称
+    var last=my.split('.');
+    var filename=last[0];
+    {#//$.get("{{url_for('main.w_net_upload',filename=filename) }}");#}
+    //$.get("/w_newtask/w_net-upload", {filename : filename}, function(data){});
+    //alert("filename："+filename);
+    // alert("你选择的文件类型为："+laststr);
+}
+</script>
+</body>
+</html>

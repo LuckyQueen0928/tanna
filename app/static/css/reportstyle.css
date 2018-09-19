@@ -1,0 +1,306 @@
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background: transparent;
+}
+@font-face { 
+	font-family:'YaHei Consolas Hybrid'; 
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+* {
+    font-family:"YaHei Consolas Hybrid";
+    font-size:14px;
+  }
+body{
+        background-color:#1d1d1d;
+        min-height:768px;
+        margin: 0 auto; 
+        padding:0;
+        color: #ffffff;
+		font-size:14px;
+		position: relative;
+     }
+.container {
+	width:1002px; 
+	margin: 0 auto;
+	margin-botttom:30px;
+ 	position: relative; 	
+ 	}
+.container h1{
+	font-size:20px;
+	text-align:center;
+	margin: 0 auto;
+	margin-top:20px;
+	padding-bottom:20px;
+	}
+.line_chart{
+	clear: both;
+	height: 400px;
+	margin:0 auto;
+	padding-bottom:20px;	
+   }
+.bll-cover{
+	width: 500px;
+	height: 400px;
+	float:left;
+	display:inline;
+	margin:0 auto;
+}
+.cover-found{
+	width: 500px;
+	height: 400px;
+	float:right;
+	margin:0 auto;
+}
+.report_discription{
+	margin:20px auto;
+	margin-top:0;
+}
+.report_info{
+	width:970px;
+	padding:10px;
+	margin: 10px auto;
+	margin-bottom: 30px;
+	line-height: 150%;
+	border-radius: 5px;
+	background: rgba(0,0,0,0.5);
+	box-shadow: #fff 0 0 8px;
+
+}
+/*.report_info>h2{*/
+	/*font-size:16px;*/
+	/*margin:8px auto;*/
+/*}*/
+
+.report_info>div>span{
+	display:inline-block;
+	width:210px;
+	padding-left: 10px;
+	margin-left:10px;
+	line-height: 30px;
+	border-radius: 3px;
+}
+.report_info>div>span[title]:hover{
+	background: #8C8C8C;
+}
+.report_info>div>span b{
+	color:#26D82F;
+}
+.report_info>div>span i{
+	font-style: normal;
+}
+.report_discription h2{
+	font-size:18px;
+}
+.report_discription h3{
+	font-size:18px;
+}
+.report_discription p{
+	font-size:14px;	
+    padding:5px 0 0 10px;   
+}
+.exception{
+	margin: 0 0 30px 0;
+	}
+.exception p{
+	font-size:14px;
+	padding:5px 0 0 10px;
+}
+table{
+		width: 940px;
+		border:solid 1px #add9c0;
+        margin: 10px auto;
+        color: honeydew;
+        border-collapse: collapse;
+     }
+
+/*异常信息下载table的格式*/
+table tbody tr td{
+              padding-top: 6px;
+              padding-bottom: 6px;
+              border: 1px solid #808080;
+              color:honeydew;
+              font-weight:bold;}
+table tbody th{
+              padding-top: 6px;
+              padding-bottom: 6px;
+              border: 1px solid #808080;
+              color:honeydew;
+              font-weight:bold;}
+table td{padding-left: 20px;}
+
+table thead tr {
+              border: 1px solid #808080;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              color: honeydew;
+              font-weight:bold;
+}
+table thead tr th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+}
+td a{
+    color: honeydew;
+    font-weight:bold;
+}
+.report_discription>p,.report_discription table{
+	margin-left:30px;
+}
+.report_discription p.task_info span{
+	display:inline-block;
+	margin-right:50px;
+
+}
+.report_discription h2{
+	margin-bottom:10px;
+}
+.info_text{
+	display: inline-block;
+	font-size:14px;
+	font-weight: normal;
+	margin-left:50px;
+	font-style: italic;
+}
+#changpage{
+			  color:white;
+			  margin-top:20px;
+			  float:right;
+			  margin-bottom:30px;
+			  margin-right:20px;
+			  line-height:28px;
+		    }
+#changpage a{
+	text-decoration: none;
+}
+.pagefirst{
+			 /*font-family:"\u5b8b\u4f53,Arial";*/
+	         background-color:#272727;
+			 width:68px;
+			 text-align:center;
+			 border-left:1px solid #4e4d4d;
+			 border-top:1px solid #4e4d4d;
+			 border-bottom:1px solid #4e4d4d;
+			 display:inline-block;
+			 color:#eeeeee;
+			 line-height:28px;
+			 float:left;
+			 border-radius:4px 0 0 4px;
+			}
+.yema{
+		/*font-family:"\u5b8b\u4f53,Arial";*/
+		background-color:#272727;
+		width:28px;
+		text-align:center;
+		border-left:1px solid #4e4d4d;
+	    border-top:1px solid #4e4d4d;
+		border-bottom:1px solid #4e4d4d;
+	    display:inline-block;
+	    color:#eee;
+	    line-height:28px;
+	    float:left;
+	  }
+.nowyema{
+			/*font-family:"\u5b8b\u4f53,Arial";*/
+			background-color:#272727;
+			width:28px;
+			text-align:center;
+			border-left:1px solid #4e4d4d;
+			border-top:1px solid #4e4d4d;
+			border-bottom:1px solid #4e4d4d;
+			display:inline-block;
+			line-height:28px;
+			color:red;font-weight:700;
+			float:left;
+		  }
+.pagelast{
+			 /*font-family:"\u5b8b\u4f53,Arial";*/
+			 background-color:#272727;
+			 width:68px;
+			 text-align:center;
+			 border:1px solid #4e4d4d;
+			 display:inline-block;
+			 color:#eee;
+			 line-height:28px;
+			 float:left;
+			 border-radius:0 4px 4px 0;
+             margin-right: 10px;
+		}
+.differ{
+	width:900px;
+	margin-left:38px;
+	margin-top:20px;
+}
+.data_header{
+	border-top:2px solid #999;
+	border-bottom:1px solid #999;
+}
+.data_header span{
+	display:inline-block;
+	padding:10px 0;
+	text-align:center;
+}
+.data_header .total{
+	float:right;
+	margin-right:20px;
+	color:#32972f;
+	font-weight: bold;
+}
+.data_header span:first-child{
+	border-right: 1px solid #999;
+	width:80px;
+}
+ul, li {
+	list-style: none;
+}
+#wrapper {
+	width: 950px;
+	margin: 20px auto;
+}
+.data-container {
+	margin-top: 5px;
+	margin-bottom: 30px;
+	height:345px;
+}
+.data-container ul {
+	padding: 0;
+	margin: 0;
+}
+.data-container li {
+	margin-bottom: 5px;
+	padding:5px 0;
+	/*background: rgba(255,255,255,0.3);*/
+	color: #666;
+	border-bottom:1px dashed #aaa ;
+}
+.data-container li span{
+	color:#fff;
+	display: inline-block;
+}
+.data-container li span:first-child{
+	width:80px;
+	text-align: center;
+	border-right: 1px dashed #aaa;
+	color:#ffff00;
+}
+.data-container li a{
+	color:#aaa;
+	text-decoration: none;
+	margin-left:10px;
+}
+.data-container li a:hover{
+	color:#32972f;
+	font-weight: bold;
+}

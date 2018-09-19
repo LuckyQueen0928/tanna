@@ -1,0 +1,33 @@
+body{
+    background-color:#fff;
+    color:#333;
+}
+a{
+    color:#333;
+}
+.index_login a{
+    color:#CBCBCB;
+}
+.indexheader {
+    background-color: #0068B7;
+}
+.index_nav{
+    background-color: #0068B7;
+}
+.index_nav li a{
+    color:#fff;
+}
+.index_navbox {
+    width:1002px;
+    margin:0 auto;
+    background-color: #fff;
+}
+.index_nav .active {
+    background-color: #4D96CD;
+}
+.index_nav .active a{
+    color:#fff;
+}
+.index_login a {
+    margin-top:30px;
+}

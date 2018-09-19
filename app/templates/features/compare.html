@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <meta charset="utf-8">
+    <title>覆盖率对比报告</title>
+    <script src="/static/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/css/reportcomparestyle.css" type="text/css" >
+</head>
+<body>
+    <div class="heater" style="text-align: center;"><h1>覆盖率对比报告</h1></div>
+    <div class="container">
+        <h3 class="taskname1" >任务{{ info['task1'].tid }}：{{ info['task1'].task_name }}</h3>
+        <h3 class="taskname2">任务{{ info['task2'].tid }}：{{ info['task2'].task_name }}</h3>
+        <div class="left_up" id="task1_cover"></div>
+        <div class="right_up" id="task2_cover"></div>
+        <div class="left_down" id="task1_survey"></div>
+        <div class="right_down" id="task2_survey"></div>
+        <div style="clear: both"></div>
+        <div class="top" id="all_line_chart"></div>
+     </div>
+     <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('task1_cover'));
+        option = {
+        title : {
+            text: '当前BBL覆盖率',
+            subtext: '已覆盖的BBL数/BBL总数',
+            x:'center',
+            textStyle:{fontWeight:'bold',color:'honeydew'},
+            subtextStyle: {color: 'honeydew' }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['已覆盖BBL数','未覆盖BBL数'],
+            textStyle:{fontWeight:'bold', color:'honeydew'}
+        },
+        color:['#26D82F', '#8C8C8C'],
+        series : [
+            {
+                stack :true,
+                name: '覆盖率',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:{{ info['has_cover1'] }}, name:'已覆盖BBL数'},
+                    {value:{{ info['bbl_count1'] - info['has_cover1'] }}, name:'未覆盖BBL数'}
+                    ],
+                itemStyle:{
+                            normal:{
+                                label:{
+                                   show: true,
+                                   formatter: '{b} :\n {c} ({d}%)'
+                                   },
+                                labelLine :{show:true}
+                               }
+                           }
+            }
+        ]
+    };
+          myChart.setOption(option);
+        </script>
+
+        <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('task1_survey'));
+        option = {
+        title : {
+            text: '覆盖和探测比',
+            subtext: '已覆盖/已探测的BBL',
+            x:'center',
+            textStyle:{fontWeight:'bold', color:'honeydew'},
+            subtextStyle: {color: 'honeydew' }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['已覆盖BBL数','已探测未覆盖BBL数'],
+            textStyle:{fontWeight:'bold', color:'honeydew'}
+        },
+        color:['#26D82F', '#D8CD2E'],
+        series : [
+            {
+                stack :true,
+                name: '覆盖率',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:{{ info['has_cover1'] }}, name:'已覆盖BBL数'},
+                    {value:{{ info['has_found1'] }}, name:'已探测未覆盖BBL数'}
+                ],
+                itemStyle:{
+                            normal:{
+                                label:{
+                                   show: true,
+                                   formatter: '{b} :\n {c} ({d}%)'
+                                   },
+                                labelLine :{show:true}
+                               }
+                           }
+            }
+        ]
+    };
+          myChart.setOption(option);
+        </script>
+        <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('task2_cover'));
+        option = {
+        title : {
+            text: '当前BBL覆盖率',
+            subtext: '已覆盖的BBL数/BBL总数',
+            x:'center',
+            textStyle:{fontWeight:'bold', color:'honeydew'},
+            subtextStyle: {color: 'honeydew' }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['已覆盖BBL数','未覆盖BBL数'],
+            textStyle:{fontWeight:'bold', color:'honeydew'}
+        },
+        color:['#26D82F', '#8C8C8C'],
+        series : [
+            {
+                name: '覆盖率',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:{{ info['has_cover2'] }}, name:'已覆盖BBL数'},
+                    {value:{{ info['bbl_count2'] - info['has_cover2'] }}, name:'未覆盖BBL数'}
+                    ],
+                itemStyle:{
+                            normal:{
+                                label:{
+                                   show: true,
+                                   formatter: '{b} :\n {c} ({d}%)'
+                                   },
+                                labelLine :{show:true}
+                               }
+                           }
+            }
+        ]
+    };
+          myChart.setOption(option);
+        </script>
+
+        <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('task2_survey'));
+        option = {
+        title : {
+            text: '覆盖和探测比',
+            subtext: '已覆盖/已探测的BBL',
+            x:'center',
+            textStyle:{fontWeight:'bold', color:'honeydew'},
+            subtextStyle: {color: 'honeydew' }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['已覆盖BBL数','已探测未覆盖BBL数'],
+            textStyle:{fontWeight:'bold', color:'honeydew'}
+        },
+        color:['#26D82F', '#D8CD2E'],
+        series : [
+            {
+                stack :true,
+                name: '覆盖率',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:{{ info['has_cover2'] }}, name:'已覆盖BBL数'},
+                    {value:{{ info['has_found2'] }}, name:'已探测未覆盖BBL数'}
+                ],
+                itemStyle:{
+                            normal:{
+                                label:{
+                                   show: true,
+                                   formatter: '{b} :\n {c} ({d}%)'
+                                   },
+                                labelLine :{show:true}
+                               }
+                           }
+            }
+        ]
+    };
+          myChart.setOption(option);
+        </script>
+
+        <script type="text/javascript">
+        var myChart1 = echarts.init(document.getElementById('all_line_chart'));
+        option = {
+        tooltip: {
+            show:true,
+            trigger: 'axis',
+            position:function(p){
+                return[p[0]+10,p[1]-10];
+            }
+          },
+        calculable : false,
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            borderWidth: 0,
+            data:['任务{{ info['task1'].tid }}：{{ info['task1'].task_name }}覆盖数','任务{{ info['task2'].tid }}：{{ info['task2'].task_name }}覆盖数'],
+            textStyle:{fontWeight:'bold', color:'honeydew'}
+        },
+        grid: {
+            left: '3%',
+            right: '3%',
+            bottom: '10%',
+            containLabel: true
+        },
+        toolbox: {
+            show:true,
+            feature: {
+                saveAsImage:
+                {
+                    show : true,
+                    title : '保存为图片',
+                    type : 'png',
+                    lang : ['点击保存']
+                }
+            }
+        },
+        xAxis: {
+            splitnumber:500,
+             min:0,
+             boundaryGap: true,
+             axisLine : {    // 轴线
+                show: true,
+                lineStyle: {
+                                color: '#ecf1de',
+                                type: 'solid',
+                                width: 2
+                            }
+            },
+            axisTick : {    // 轴标记
+                show:true,
+                length: 10,
+                lineStyle: {
+                                color: 'green',
+                                type: 'solid',
+                                width: 2
+                            }
+            },
+            axisLabel : {
+                show:true,
+                interval: 'auto',    // {number}
+                margin: 15,
+                formatter: '{value}',
+                textStyle: {
+                                color: 'honeydew',
+                                fontFamily: 'sans-serif',
+                                fontSize: 14,
+                                fontStyle: 'italic',
+                                fontWeight: 'bold'
+                            }
+            },
+            splitLine : {
+                show:true,
+                lineStyle: {
+                    color: 'honeydew',
+                    type: 'dashed',
+                    width: 1
+                }
+            },
+            splitArea : {
+                show: true,
+                areaStyle:{
+                    color:['#1b1b1b','#1b1b1b']
+                }
+            },
+            data:[{{ large_log|safe }}]
+
+        },
+        yAxis: {
+            name:'覆盖数',
+            nameTextStyle:{fontSize: 13,fontWeight: 'bold'},
+            type : 'value',
+            position: 'left',
+            min: 0,
+            splitNumber: 10,
+            boundaryGap: [0,0.1],
+            axisLine : {    // 轴线
+                show: true,
+                lineStyle: {
+                    color: '#ecf1de',
+                    type: 'dashed',
+                    width: 2
+                }
+            },
+            axisTick : {    // 轴标记
+                show:true,
+                length: 10,
+                lineStyle: {
+                    color: 'green',
+                    type: 'solid',
+                    width: 2
+                }
+            },
+            axisLabel : {
+                show:true,
+                interval: 'auto',    // {number}
+                margin: 18,
+                formatter: '{value}',    // Template formatter!
+                textStyle: {
+                    color: 'honeydew',
+                    fontFamily: 'verdana',
+                    fontSize: 10,
+                    fontStyle: 'normal',
+                    fontWeight: 'bold'
+                }
+            },
+            splitLine : {
+                show:true,
+                lineStyle: {
+                    color: 'honeydew',
+                    type: 'dotted',
+                    width: 2
+                }
+            },
+            splitArea : {
+                show: true,
+                areaStyle:{
+                    color:['#1b1b1b','#1b1b1b']
+                }
+            }
+        },
+        color:['yellow', 'blue'],
+        dataZoom : {
+             show : true,
+             backgroundColor:'#c9c9c9',
+             fillerColor:'#EDE132',
+             handleColor:'#000',
+             handleSize:30,
+             start : 0,
+             end : 100
+         },
+        series: [
+            {
+                name:'任务{{ info['task1'].tid }}：{{ info['task1'].task_name }}覆盖数',
+                nameStyle:{fontWeight:'bold', color:'white'},
+                type:'line',
+                data:[{{ string1 }}]
+            },
+            {
+                name:'任务{{ info['task2'].tid }}：{{ info['task2'].task_name }}覆盖数',
+                nameStyle:{fontWeight:'bold', color:'white'},
+                type:'line',
+                data:[{{ string2 }}]
+            }
+        ]
+    };
+             myChart1.setOption(option);
+    </script>
+</body>
+</html>

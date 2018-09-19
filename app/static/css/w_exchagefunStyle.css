@@ -1,0 +1,46 @@
+body {
+    background: url(../images/w_changeone.jpg) top center;
+}
+.bigtop {
+    background-color: #fff;
+}
+
+.bigtitle h2 {
+    border-color: #0068B7;
+}
+.bigtitle {
+    border-bottom: 1px solid #ccc;
+}
+.changebox{
+    overflow: hidden;
+    padding-top: 18px;
+}
+.funcitonlist {
+    background-color: #76B7EA;
+    color:#333;
+    width:580px;
+    padding-left:10px;
+    padding-right:10px;
+}
+#tracePList{
+    overflow:scroll;
+    height:458px;
+}
+.listbt {
+    display: inline;
+    color: #f6f6f6;
+    font-size: 18px;
+    line-height: 74px;
+    float:left;
+    margin-top:0;
+    margin-left:0;
+}
+.rightbox {
+    display: inline;
+    float: right;
+    background-color: #76B7EA;
+    padding-left: 29px;
+    padding-right: 30px;
+    margin-top: 0;
+    padding-bottom: 12px;
+}

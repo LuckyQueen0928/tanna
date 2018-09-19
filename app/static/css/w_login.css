@@ -1,0 +1,113 @@
+/*字体样式*/
+@font-face {
+	font-family:'YaHei Consolas Hybrid';
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+* {
+    font-family:"YaHei Consolas Hybrid";
+    font-size:14px;
+  }
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+}
+body {
+    background:url("/static/images/w_bgrepeat.png") repeat;
+	color: #000;
+    margin-top: 10%;
+	padding: 0;
+	position: relative;
+}
+h1{ font-size:20px;}
+h2{ font-size:18px;}
+h3{ font-size:16px;}
+h4{ font-size:14px;}
+h5{ font-size:12px;}
+h6{ font-size:10px;}
+h1,h2,h3,h4,h5,h6{ color:#563D64;}
+a{ text-decoration: none; }
+.lf { float:left; }
+.rt { float:right; }
+/*主体部分*/
+.container{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+.container p{
+    width:500px;
+    margin:0 auto;
+    font-size:50px;
+    font-weight:bold;
+    color:#009944;
+    font-style: italic;
+    text-align:center;
+    margin-bottom: 30px;
+}
+.container p span{
+    font-size:15px;
+    color:#03A0D5;
+    font-style: normal;
+}
+.cate{
+    width:800px;
+    margin:0 auto;
+    overflow: hidden;
+}
+.cate a{
+    float: left;
+    width:330px;
+    height:217px;
+    background-color:rgba(255,255,255,0.2);
+    border-radius: 5px;
+    border:1px solid transparent;
+
+}
+.cate a:last-child{
+    float: right;
+}
+.cate a:hover{
+    background-color:rgba(255,255,255,0.1);
+    border:1px solid #fff;
+}
+/*页脚部分*/
+.line{
+    width:100%;
+    height:1px;
+    background: -webkit-linear-gradient(right, #262626 , #5B5B5B ,#262626); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #262626 , #5B5B5B ,#262626); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #262626 , #5B5B5B ,#262626); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #262626 , #5B5B5B ,#262626); /* 标准的语法 */
+}
+.foot{
+    width:100%;
+    background: -webkit-linear-gradient(bottom, #232323 50% , #0D0D0D); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom, #232323 50% , #0D0D0D); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom, #232323 50% , #0D0D0D); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to bottom, #232323 50% , #0D0D0D); /* 标准的语法 */
+    border-top:2px solid #262626;
+    border-bottom:2px solid #262626;
+    text-align: center;
+}
+.foot img{
+    height:60px;
+    opacity:0.5;
+    filter: contrast(0.3);
+}
+
+
+
+
+

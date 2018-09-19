@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<title>Process-Conctrl</title>
+<link rel="stylesheet" type="text/css" href="/static/css/overallstyle.css">
+<link rel="stylesheet" type="text/css" href="/static/css/nbitstyle.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/processContralStyle.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/w_header.css">
+<link rel="stylesheet" type="text/css" href="/static/css/w_processContralStyle.css"/>
+</head>
+<body>
+<!--首页logo部分-->
+<div class="indexheader">
+    <div class="index_logo">
+    <img src="/static/images/w_logo.png">
+    </div>
+</div>
+<!--导航-->
+<nav class="index_navbox">
+<ul class="index_nav">
+    <li><a href={{ url_for('main.login_guide') }}>首页</a></li>
+    <li><a href={{ url_for('main.w_index') }}>任务管理</a></li>
+    <li class="active"><a href="/w_newtask/">新建任务</a></li>
+    <li><a href="">关于</a></li>
+</ul>
+</nav>
+<!--中间部分-->
+<div class="content">
+    <div class="content-2">
+        <h3>覆盖率记录进程</h3>
+        <div>
+            <p>覆盖率记录进程状态: {{ logProcessStatus }}</p>
+            <p>如果要停止当前进程：<a href="{{ url_for('features.stop_log_process') }}"  class="t12">停止</a></p>
+            <p>如果要开始当前进程：<a href="features.start_log_process"  class="t12">开始</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

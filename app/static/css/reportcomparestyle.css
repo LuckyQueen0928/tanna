@@ -1,0 +1,85 @@
+/*×ÖÌåÑùÊ½*/
+@font-face {
+	font-family:'YaHei Consolas Hybrid';
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+* {
+    font-family:"YaHei Consolas Hybrid";
+    font-size:14px;
+  }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	outline: 0;
+	background: transparent;
+}
+body {
+    background-color:#1b1b1b;
+	color: #ffffff;
+	padding:0;
+	margin: 0;
+	position: relative;
+}
+h1{ font-size:20px;}
+h2{ font-size:18px;}
+h3{ font-size:16px;}
+h4{ font-size:14px;}
+h5{ font-size:12px;}
+h6{ font-size:10px;}
+h1,h2,h3,h4,h5,h6{ color:honeydew;}
+small{ font-size:10px;}
+b, strong{ font-weight:bold;}
+.container { 
+				width: 1002px;
+				margin: 0 auto; 
+				position: relative;
+				margin-bottom: 60px;
+		  }
+.top{
+	height: 400px;
+	margin:0 auto;
+	}
+.taskname1{
+	width: 500px;
+	float:left;	
+	line-height:20px;
+	font-size:18px;
+	}
+.taskname2{
+	width: 500px;
+	float:right;
+	line-height:20px;
+	font-size:18px;
+	}
+.left_up{
+	width: 500px;
+	height: 400px;
+	margin:0 auto;
+	float:left;
+	display:inline;
+	}
+.right_up{
+	width: 500px;
+	height: 400px;
+	margin:0 auto;
+	float:right;
+	}
+.left_down{
+	width: 500px;
+	height: 400px;
+	margin:0 auto;
+	padding-bottom:20px;
+	float:left;
+	display:inline;	
+	}
+.right_down{
+	width: 500px;
+	height: 400px;
+	margin:0 auto;
+	padding-bottom:20px;
+	float:right;
+	}
+
+

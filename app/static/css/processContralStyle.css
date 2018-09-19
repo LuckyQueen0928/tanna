@@ -1,0 +1,133 @@
+/*×ÖÌåÑùÊ½*/
+@font-face {
+	font-family:'YaHei Consolas Hybrid';
+	src:url('../fonts/YaHeiConsolasHybrid.ttf');
+ }
+* {
+    font-family:"YaHei Consolas Hybrid";
+    font-size:14px;
+  }
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+    background-color:#1b1b1b;
+	color: #f1f0db;
+	font:18px Arial;
+	position: relative;
+
+}
+
+h2{ font-size:18px;color: #52ff07;margin: 10px 0 10px 0}
+h3{ font-size:16px;color: #9eee34;padding:13px 0 10px 20px}
+.content{
+	width:1002px;
+	margin: 0 auto;
+	/*padding: 10px;*/
+}
+.contentstyle{
+	width:100%;
+}
+.content a{	
+	letter-spacing: -0.05em;
+	line-height: 20px;
+	margin: 0 auto;
+    padding-left: 22px;
+}
+.content p{
+    font-size:14px;
+}
+.content-1{
+	width:960px;
+    background-color: #1e1e1e;
+    padding:10px;
+    margin: 20px auto;
+    border-radius: 10px; 
+    border: 1px solid #808080;
+
+}
+.content-2{
+	width:960px;
+    background-color: #1e1e1e;
+    padding:10px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border-radius: 10px; 
+    border: 1px solid #808080;  
+}
+.content-1>div,.content-2>div{
+    padding-left:20px;
+}
+p a{
+    margin-right: 100px;
+}
+p{
+	color: #f1eee5;
+	font: bold 25px;
+    padding-top: 5px;
+    padding-left: 25px
+	letter-spacing: -0.05em;
+	/*line-height: 20px;*/
+	margin: 5px 15px 10px 20px;
+}
+ input{
+    color: #e8e8e8;
+    background-color: #1b1b1b;
+    margin: 0 5px 10px 5px;
+    padding-top: 5px;
+    padding-bottom:5px;
+    padding-left: 5px;
+}
+ input .timeout{width: 20px;}
+label{
+    color: #ecf1de;
+    margin: 10px 15px 15px 20px;
+}
+.t12{
+        text-decoration : none;
+        font-size: 14px;
+        color: #e8e8e8;
+        padding-top: 5px;
+        padding-right: 20px;
+        padding-bottom: 5px;
+        padding-left: 20px;
+        border: 1px #15ff2c solid;
+        background-color: #1b1b1b;
+        text-align: center
+    }
+
+.t12:hover{
+        text-decoration : none;
+        font-size: 14px;
+        color: #52ff07;
+        padding-top: 5px;
+        padding-right: 20px;
+        padding-bottom: 5px;
+        padding-left: 20px;
+        border: 1px #52ff07 solid;
+        background-color: #1b1b1b;
+        text-align: center
+    }
+form label,form input{
+    font-size:14px;
+}
+form label>span{
+    display: inline-block;
+    width:220px;
+    padding-left:15px;
+}

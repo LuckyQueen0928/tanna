@@ -1,0 +1,35 @@
+/*滚动条整体*/
+::-webkit-scrollbar{
+    width:14px; /*滚动条宽度*/
+}
+/*滚动条按钮*/
+::-webkit-scrollbar-button {
+}
+::-webkit-scrollbar-track{
+    background-color: #fff;
+}
+::-webkit-scrollbar-track-piece{
+    background-color: #fff;
+    -webkit-border-radius:4px;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#008000;
+    border:solid 1px lightgray;
+    border-radius:4px;
+}
+/*横竖滚动条交角*/
+::-webkit-scrollbar-corner {
+    background-color: #fff;
+}
+/*横竖滚动条交角图案*/
+::-webkit-resizer {
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+/*鼠标滑过滚动条*/
+::-webkit-scrollbar-thumb:hover{
+    background-color: #2E81FA;
+}
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0px 1000px white inset;
+}

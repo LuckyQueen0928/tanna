@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>file-config</title>
+<link rel="stylesheet" type="text/css" href="/static/css/fileconfigstyle.css">
+<script src="/static/jquery.js"></script>
+<script>
+  window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')
+</script>
+</head>
+<body>
+<!--首页logo部分-->
+<div class="bigtop">
+<div class="indexheader">
+	<div class="index_logo">
+    <img src="/static/images/logo.png">
+    </div>
+    <div class="index_login">
+        <a href="{{ url_for('auth.resetpassword') }}" target="_blank">重置密码</a>
+        <a href="{{ url_for('auth.logout') }}" target="_blank">退出登录</a>
+    </div>
+</div>
+</div>
+<!--导航-->
+<div class="index_navbox">
+<ul class="index_nav">
+	<li><a href="/">首页</a></li>
+    <li><a href="/">任务管理</a></li>
+    <li class="active"><a href="/newtask/">新建任务</a></li>
+    <li><a href="">关于</a></li>
+</ul>
+</div>
+<!--content-->
+<div class="fileconfig">
+<div class="bigleft">
+<h2 class="h2bt">断点续测文件配置：</h2>
+<form id="file-config" method="post" enctype="multipart/form-data">
+ <div class="jilu">
+    <span>记录限制</span>
+    <input type="text" value="{{ log_limit }}" name="loglimit" />
+ </div>
+ <div class="jilu">
+    <span>指令个数</span>
+    <input type="text" value="{{ ins_limit }}" name="ins" />
+ </div>
+ <div class="jilu">
+    <span>污点起点</span>
+    <input type="text" value="{{ taint_start }}" name="taint_offset_start"/>
+ </div>
+  <div class="jilu">
+    <span>污点长度</span>
+    <input type="text" value="{{ taint_offset }}" name="taint_offset"/>
+ </div>
+  <div class="jilu">
+    <span>测试用例总数</span>
+    <input type="text" value="{{ case_count }}" name="case_count"/>
+  </div>
+  <div class="jilu">
+    <span>程序端口</span>
+    <input type="text" value="{{ app_port }}" name="port_num"/>
+  </div>
+  <div class="jilu">
+    <span>测试用例名称</span>
+    <input type="text" value="{{ peach_test }}" name="peach_test"/>
+  </div>
+  <div style="clear: both"></div>
+  <div class="algorithmchoose">
+    <span>算法选择</span>
+    <input type="radio" id="fuzz" name="app_status" value="6"/>
+      <label class="l1" for="fuzz">Fuzz</label>
+    <input type="radio" id="syme" name="app_status" value="0"/>
+      <label class="l2" for="syme">符号执行</label>
+  </div>
+  <div class="algorithmchoose">
+    <span>插桩模式</span>
+    <input type="radio" id="addmode" name="stubmode" value="1"/>
+      <label class="l1" for="addmode">附加模式</label>
+    <input type="radio" id="createmode" name="stubmode" value="0"/>
+      <label class="l2" for="createmode">创建模式</label>
+  </div>
+ <div class="daice">
+   <span>PeachPit文件</span>
+   <input name="peachpit" id="peachpitfile" type="file" accept=".zip" class="filechance" onclick="tishi()" onchange="peachpitfile_onselect()"/>
+ </div>
+ <div class="daice">
+    <span>HOOK函数</span>
+    <textarea name="hook" class="hook_up" maxlength="255"></textarea>
+ </div>
+    <div class="sub_net">
+        <button  type="button" class="back"  onclick ="javascript:history.go(-1);">上一步</button>
+        <button type="submit" class="filesubmit">提交</button>
+    </div>
+</form>
+</div>
+	<div class="bigright">
+    	<div class="bigtitle">
+		<h2>填写说明</h2>
+        </div>
+        <div class="dl_nr">
+        <p>
+        <span>1.记录限制</span><br>
+        &nbsp;&nbsp;限制trace文件中记录指令数.<br>
+        <span>2.指令个数</span><br>
+        &nbsp;&nbsp;限制待测程序分析指令数.<br>
+        <span>3.污点起点</span><br>
+        &nbsp;&nbsp;根据需要指定污点起点，限制污点选定.<br>
+        <span>4.污点长度</span><br>
+        &nbsp;&nbsp;对污点长度进行限制.<br>
+        <span>5.程序端口号</span><br>
+        &nbsp;&nbsp;填写目标程序的应用端口号.<br>
+        <span>6.测试用例名称</span><br>
+        &nbsp;&nbsp;测试用例的名称要和PeachPit的名称相同.<br>
+        <span>7.PeachPit文件</span><br>
+        &nbsp;&nbsp;选择ZIP压缩文件.<br>
+        </p>
+        </div>
+	</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $(function(){
+        $(':text').focus(function(){
+            this.select();
+        });
+      });
+    });
+    $("form#upload").submit(function(){
+        var formData = new FormData($(this)[0]);
+        $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: formData,
+            async: false,
+            success: function (data) {
+                window.href = '{{ url_for('.opentask', taskid=taskid) }}';
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    });
+    /* 根据数据库中的数据，在页面中显示对应的插桩模式 */
+    var status={{ app_state }};
+    console.log(status);
+    if( status==5){
+        $("#fuzz").attr("checked","checked");
+    }else if(status==1){
+        $("#syme").attr("checked","checked");
+    }
+    /* 根据数据库中的数据，在页面中显示对应的算法 */
+    var mode={{ instru_mode }};
+    if( mode==0 ){
+        $("#createmode").attr("checked","checked");
+    }else{
+        $("#addmode").attr("checked","checked");
+    }
+    $("textarea").val(`{{ hook_up }}`);
+</script>
+</body>
+</html>

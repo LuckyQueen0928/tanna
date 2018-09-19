@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/bootflatly.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/static/css/nbitstyle.css">
+<link rel="stylesheet" type="text/css" href="/static/css/overallstyle.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/pagination.css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>  -->
+<link rel="stylesheet" href="/static/css/alertify.core.css" />
+<link rel="stylesheet" href="/static/css/alertify.default.css" />
+<script src="/static/js/alertify.min.js"></script>
+<script src="/static/jquery.js"></script>
+</head>
+
+<body>
+<!--首页logo部分-->
+<div class="indexheader">
+    <div class="index_logo">
+    <img src="/static/images/logo.png">
+    </div>
+    <div class="index_login">
+        <a href="{{ url_for('auth.resetpassword') }}" target="_blank">重置密码</a>
+        <a href="{{ url_for('auth.logout') }}" target="_blank">退出登录</a>
+    </div>
+</div>
+<!--导航-->
+<nav class="index_navbox">
+    <ul class="index_nav">
+        <li><a href={{ url_for('main.login_guide') }}>首页</a></li>
+        <li class="active"><a href={{ url_for('main.index') }}>任务管理</a></li>
+        <li><a href="/newtask/">新建任务</a></li>
+        <li><a href="">关于</a></li>
+        <li class="clear" title="文件清理"><a href="#"></a></li>
+    </ul>
+</nav>
+<!--中间部分-->
+<div class="center_bg">
+ <div class="index_container">
+{#        <h2>历史任务列表</h2>#}
+        <div class="fixed_height">
+            <table id="task_list" >
+                <thead>
+                <tr style="width:100%">
+                <th class="index_task6"><input type="checkbox" name="allChecked" onclick="SelectAll()" ></th>
+                    <th class="index_task1">任务ID</th>
+                    <th class="index_task2">任务信息</th>
+                    <th class="index_task3">任务ID</th>
+                    <th class="index_task4">创建时间</th>
+                    <th class="index_task7">任务对比</th>
+                    <!--<th class="index_task8">任务报告</th>-->
+                    <th class="index_task5">控制</th>
+                </tr>
+                </thead>
+                <tbody id="tasklistnbit">
+                {% for task in tasklist.items %}
+                    {% set tasknum = tasknum + 1 %}
+                    <tr>
+                    <td class="index_number6"><input type="checkbox" name="choose" ></td>
+                        <!--<td class="index_number1">{{ tasknum+(page-1)*10 }}</td>-->
+                        <td class="index_number1">{{task.tid}}</td>
+                        <td class="index_number2">
+                            <div class="report">
+                                <a href={{ url_for('features.report', taskid=task.tid)}} target="_blank"><img src="/static/images/report.png"/>报告</a>
+                            </div>
+                            <div class="taskname" >
+                                <a href={{ url_for('.opentask', taskid=task.tid)}} title="{{ task.task_desc }}" target="_blank" >{{ task.task_name }}</a>
+                            </div>
+                            <div class="platform">{{ task.platform }}</div>
+                            <div class="app_state">{{ task.app_state }}</div>
+                            <div class="instru_mode">{{ task.instru_mode }}</div>
+                        </td>
+                        <td class="index_number3">{{ task.tid }}</td>
+                        <td class="index_number4">{{ task.create_date }}</td>
+                        <td class="index_number7" ><span>比较</span></td>
+                        <td class="index_number5">
+                        <div class="cont1" style="{% if task.task_state == 1 %}display: block; {% else %} display: none; {% endif %}">
+                        <a>暂停中<img class="contral" src="/static/images/run.png"></a>
+                        </div>
+                        <div class="stop1" style="{% if task.task_state == 0 %}display: block;{% else %} display: none; {% endif %}">
+                        <img src="/static/images/runing2.gif" width=16 height=16>
+                        <a>运行中<img class="contral" src="/static/images/pause.png"></a>
+                        </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfloat">
+             <div class="index_btn">
+                <input class="newtask" value="" type="button" data-toggle="modal" onclick="location.href = './newtask/'">
+                <input type="button" class="deletetask">
+             </div>
+             <div id="changpage">
+                <a class="pagefirst" href="/index?page=1">首页</a>
+                <a class="nowyema" href="/index?page={{ page - 1 }}" style="{% if not tasklist.has_prev %}display:None{% endif %}"><</a>
+                <a class="nowyema" href="">{{ page }}</a>
+                <a class="nowyema" href="/index?page={{ page + 1 }}" style="{% if not tasklist.has_next %}display:None{% endif %}">></a>
+                <a class="pagelast" href="/index?page={{ end_page }}">尾页</a>{{ page }}/{{ end_page }}页 共{{ count }}条
+             </div>
+        </div>
+        <div style="width:1002px;margin:0 auto;">
+            <span style="float:right;height:20px;color:#666;font-size: 12px;margin-right: 20px;">版本：0.2.0.20170120_Pre</span>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+</div>
+<!--尾部-->
+
+<script language="javascript">
+//TODO 鼠标经过任务名称时，显示任务描述信息   --- by cmf
+$(".index_number2 .taskname a").mouseover(function(){
+    var title = $(this).attr("title");
+    title=title=="None"?"":title;
+    $(this).attr("title",title);
+});
+
+//TODO 点击导航栏右侧的清理按钮即可清理共享目录中的多余的文件  --- by cmf
+$(".index_nav .clear").on("click",function(){
+    var move = 1;
+    $.post("/",{
+        move : move
+    }, function(data){
+        console.log(data);
+    });
+});
+$(".index_nav .clear a").click(function() {
+    var s_msg = "您确定要将多余文件移入共享目录中的extra文件夹中吗？";
+    alertify.confirm(s_msg, function (e) {
+        if (e) {
+            alertify.success("正在移动文件!");
+            var move = 1;
+            $.post("{{ url_for('main.index') }}", {move : move}, function(data, status){
+                if(data.status){
+                    alertify.success(data.msg);
+                }
+                else{
+                    alertify.error(data.msg);
+                }
+            });
+        } else {
+            alertify.error("您取消了文件移动!");
+        }
+    });
+});
+
+
+//把状态可读性更高
+ $(function(){
+    $(document).ready( function () {
+        $(".instru_mode").each(function(i,item){
+            var instru_mode = $(this).text();
+            if(instru_mode == 1){
+                $(this).text("附加");
+            }else if(instru_mode == 0){
+                $(this).text("创建");
+            }else if(instru_mode =="None"||instru_mode == ""){
+            	$(this).text("　　");
+            }
+         });
+         $(".platform").each(function(i,item){
+                var platform = $(this).text();
+                if(platform == 1){
+                    $(this).text("x64");
+                }else if(platform == 0){
+                    $(this).text("x86");
+                }
+         });       
+         $(".app_state").each(function(i,item){
+                    var app_state = $(this).text();
+                    if(app_state == 1||app_state == 0){
+                        $(this).text("SymE");
+                    }else if(app_state == 5||app_state == 6){
+                        $(this).text("Fuzz");
+                    } 
+         });
+    });
+});
+//获取任务ID1 任务对比
+   $(function(){
+      $("table#task_list .index_number7 span").on('click', function() {
+           var taskid1=$(this).parent().closest('tr').find('.index_number3').text();
+           var taskid2=compare(taskid1);
+           if(isNaN(taskid2)&&taskid2 != null && taskid2 != "")
+          {
+              alert("请输入数字！");
+          }else if (taskid2 != null && taskid2 != "" ) {
+                 window.open(" /features/compare/task-" + taskid1 + '-' + taskid2);
+             }
+      })
+   });
+//获取任务ID2
+function compare(taskid1){
+    taskid1 = taskid1;
+    window.taskid = 'test';
+     alertify.prompt("请输入您要比较的任务ID：", function (e, taskid2) {
+        if (e) {
+            alertify.success("点击确认，输入内容为: " + taskid2);
+            console.log(taskid2);
+            window.taskid = taskid2;
+            if(isNaN(taskid2)&&taskid2 != null && taskid2 != "")
+            {
+              alert("请输入数字！");
+
+             }else if (taskid2 != null && taskid2 != "" ) {
+                 window.open(" /features/compare/task-" + taskid1 + '-' + taskid2);
+             }
+        } else {
+            alertify.error("点击取消");
+        }
+    }, "1");
+    //return window.taskid;
+    }
+
+//奇数点击全选偶数点击取消全选（不管选没有选）
+var flag=false;
+function SelectAll() {
+  for(var j=1;j<=10000;j++)
+  {
+    console.log(flag);
+    var checkboxs=document.getElementsByName("choose");
+    if(flag==false && j%2!=0){
+    for (var i=0;i<checkboxs.length;i++) {
+       var e=checkboxs[i];
+       e.checked=true;
+      }
+        flag=true;
+        break;
+    }else if(flag==true && j%2==0){
+     for (var i=0;i<checkboxs.length;i++) {
+       var e=checkboxs[i];
+       e.checked=false;
+      }
+        flag=false;
+        break;
+    }
+  }
+}
+//删除任务
+ $(function(){
+  $(".deletetask").click(function() {
+      $("input[name='choose']:checked").each(function () {
+             var n = $(this).parents("tr").index();
+             n++;
+             var task_id = $('table#task_list').find("tr:eq(" + n + ")").find("td:eq(3)").text();
+             var s_msg = "注意！你正在删除任务 " + task_id + " ,请确认!";
+             alertify.confirm(s_msg, function (e) {
+                if (e) {
+                    alertify.success("正在删除任务!");
+                    $.post("{{ url_for("main.deletetask", _external=True) }}",
+                    {taskid : task_id},
+                    function(data, status){
+                      if(data.status){
+                        $("table#task_list").find("tr:eq(" + n + ")").remove();
+                        alertify.success(data.msg);
+                      }
+                      else {
+                        alertify.error(data.msg);
+                      }
+                    });
+                } else {
+                    alertify.error("您取消了任务删除!");
+                }
+            });
+         });
+     });
+});
+//继续和暂停
+$(".cont1 a img").click(function(){
+    var p = $(this).parents(".index_number5");
+    tasknum = p.parent().children('.index_number3').text();
+    console.log(tasknum);
+    p.find(".cont1").hide();
+    p.find(".stop1").show();
+    window.open('/opentask_contral/taskid-' + tasknum);  
+    window.location.reload();
+});
+$(".stop1 a img").click(function(){
+    var p = $(this).parents(".index_number5");
+    tasknum = p.parent().children('.index_number3').text();
+    $.post("{{ url_for("main.shutdownTask", _external=True) }}",
+          {tasknum : tasknum},
+          function(data, status){
+            if(data.status){
+              alertify.success(data.msg);
+            }
+            else {
+              alertify.error(data.msg);
+            }
+          });
+    p.find(".stop1").hide();
+    p.find(".cont1").show();
+   // window.location.reload();
+});
+
+</script>
+</body>
+</html>
