@@ -56,7 +56,7 @@ import ntpath
 import xml.etree.ElementTree as ET
 
 from app import db
-# 取得本地文件 by wcx
+# 取得本地文件 
 from werkzeug.datastructures import FileStorage
 
 # 使用utf-8编码
@@ -98,7 +98,7 @@ def index():
         pass
     else:
         startProcess(timeout=0, whoneed=1)
-    # TODO 判定界面传来的move值是否为1，若为1，匹配出与数据库中不同的文件，并将其移动到extra文件夹中  --- by cmf
+    # TODO 判定界面传来的move值是否为1，若为1，匹配出与数据库中不同的文件，并将其移动到extra文件夹中  
     if request.method == 'POST':
         move = request.form['move']
         if move == "1":
@@ -112,7 +112,7 @@ def index():
 
 
 def search_diff_nfs_task():
-    # 匹配出共享目录和数据库中不同的目录 ，并将这些目录移入extra文件夹中   by cmf
+    # 匹配出共享目录和数据库中不同的目录 ，并将这些目录移入extra文件夹中  
     task_hash1 = w_task_info_t.query.all()
     task_hash2 = task_info_t.query.all()
     task_hash = []
@@ -744,7 +744,7 @@ def Incremental():
         return redirect(url_for('main.blackfunclist', taskid=taskid))
         # 有疑问 return redirect(url_for('.opentask', taskid=taskid))
 
-    # TODO 返回断点续测页面需要的数据   ---by cmf
+    # TODO 返回断点续测页面需要的数据   
     return render_template('features/file_config.html',
                            taskid=taskid,
                            app_port=app_port,
